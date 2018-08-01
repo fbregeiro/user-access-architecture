@@ -13,3 +13,13 @@ export const login = async (email, password) => {
 	);
 	return camelcaseKeysDeep(response);
 };
+
+export const resetPassword = async email => {
+	const iPasswordResetRequest = { email: email };
+	factoryApi().post('authentication/reset-password', iPasswordResetRequest);
+};
+
+export const changePassword = async (token, password) => {
+	const iChangePasswordRequest = { token: token, password: password };
+	factoryApi().put('authentication/new-password', iChangePasswordRequest);
+};
