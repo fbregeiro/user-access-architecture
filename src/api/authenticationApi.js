@@ -19,7 +19,6 @@ export const resetPassword = async email => {
 	factoryApi().post('authentication/reset-password', iPasswordResetRequest);
 };
 
-export const changePassword = async (token, password) => {
-	const iChangePasswordRequest = { token: token, password: password };
+export const changePassword = async iChangePasswordRequest => {
 	factoryApi().put('authentication/new-password', iChangePasswordRequest);
 };

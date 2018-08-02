@@ -70,10 +70,10 @@ export const resetUserPassword = email => async dispatch => {
 	}
 };
 
-export const changeUserPassword = (token, password) => async dispatch => {
+export const changeUserPassword = iChangePasswordRequest => async dispatch => {
 	dispatch(beginAjaxCall());
 	try {
-		await changePassword(token, password);
+		await changePassword(iChangePasswordRequest);
 		dispatch({
 			type: AUTHENTICATION_CHANGE_PASSWORD
 		});
