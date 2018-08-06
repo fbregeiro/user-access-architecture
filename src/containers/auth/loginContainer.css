@@ -1,0 +1,33 @@
+.loginBox {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10vh;
+	align-items: center;
+}
+
+.login {
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+}
+
+.login img {
+	width: 200px;
+	align-self: center;
+	margin-bottom: 10vh;
+}
+
+.loginLinksBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.loginLinks {
+	display: flex;
+}
+
+.loginLinks span {
+	margin-right: 3px;
+}

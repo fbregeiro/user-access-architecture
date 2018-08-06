@@ -9,7 +9,7 @@ import {
 } from '../actions/actionTypes';
 
 // import { SubmissionError } from 'redux-form'; // TODO: Check when to use SubmissionError instead of throw Error
-// import history from '../store/history'; // TODO: Analyze when it's better to call history.push
+import history from '../store/history'; // TODO: Analyze when it's better to call history.push
 
 export const AUTHENTICATION_DATA = 'authentication_data';
 
@@ -33,7 +33,7 @@ export const userLogin = ({ email, password }) => async dispatch => {
 					type: AUTHENTICATION_LOGIN
 				});
 
-				// history.push('/');
+				history.push('/');
 			} else {
 				throw iLoginResponse.operationMessage;
 			}

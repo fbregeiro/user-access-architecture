@@ -1,0 +1,10 @@
+{
+	"email": {
+		"required": "Email é obrigatório",
+		"invalid": "Email inválido"
+	},
+	"password": {
+		"required": "Senha é obrigatório",
+		"doNotMatchConfirmation": "Senha e confirmação devem ser iguais."
+	}
+}
