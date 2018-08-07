@@ -1,6 +1,7 @@
 import { login, resetPassword, changePassword } from '../api/authenticationApi';
 import { ajaxFailure, beginAjaxCall } from './ajaxStatusAction';
 import { saveData, deleteData } from '../utils/persistency';
+
 import {
 	AUTHENTICATION_LOGIN,
 	AUTHENTICATION_LOGOUT,
@@ -9,7 +10,6 @@ import {
 } from '../actions/actionTypes';
 
 // import { SubmissionError } from 'redux-form'; // TODO: Check when to use SubmissionError instead of throw Error
-import history from '../store/history'; // TODO: Analyze when it's better to call history.push
 
 export const AUTHENTICATION_DATA = 'authentication_data';
 
@@ -24,16 +24,16 @@ export const userLogin = ({ email, password }) => async dispatch => {
 					userId: iLoginResponse.data.user.id,
 					email: iLoginResponse.data.user.email,
 					fullName: iLoginResponse.data.user.fullName,
-					token: iLoginResponse.data.token
+					token: iLoginResponse.data.token,
+					user_access: iLoginResponse.data.userAccess
 				};
+
 				saveData(AUTHENTICATION_DATA, authenticationData);
 
 				dispatch({
 					...authenticationData,
 					type: AUTHENTICATION_LOGIN
 				});
-
-				history.push('/');
 			} else {
 				throw iLoginResponse.operationMessage;
 			}
@@ -49,12 +49,11 @@ export const userLogin = ({ email, password }) => async dispatch => {
 	}
 };
 
-export const userLogout = () => {
+export const userLogout = () => async dispatch => {
 	deleteData(AUTHENTICATION_DATA);
-
-	return {
+	dispatch({
 		type: AUTHENTICATION_LOGOUT
-	};
+	});
 };
 
 export const resetUserPassword = email => async dispatch => {
