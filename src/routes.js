@@ -1,21 +1,21 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-//import authentication from './utils/auth';
 
 import loginContainer from './containers/auth/loginContainer';
+import resetPasswordContainer from './containers/auth/resetPasswordContainer';
 import dashboardContainer from './containers/dashboard/dashboardContainer';
-import usersContainer from './containers/users/usersContainer';
+import usersContainer from './containers/admin/users/usersContainer';
 
 import { UserContext } from './context/userContext';
 
 function PrivateRoute({ component: Component, ...rest }) {
 	return (
 		<UserContext.Consumer>
-			{userContext => (
+			{({ user }) => (
 				<Route
 					{...rest}
 					render={props =>
-						userContext.user !== null && userContext.user.token !== null ? (
+						user !== null && user.token !== null ? (
 							<Component {...props} />
 						) : (
 							<Redirect
@@ -34,8 +34,9 @@ export default (
 		<Switch>
 			<Route exact path="/" component={null} />
 			<Route exact path="/login" component={loginContainer} />
+			<Route exact path="/reset-password" component={resetPasswordContainer} />
 			<PrivateRoute path="/dashboard" component={dashboardContainer} />
-			<PrivateRoute path="/users" component={usersContainer} />
+			<PrivateRoute path="/admin/users" component={usersContainer} />
 		</Switch>
 	</div>
 );

@@ -5,8 +5,13 @@ import { hot } from 'react-hot-loader';
 import { ConnectedRouter } from 'react-router-redux';
 
 import history from '../store/history';
-import Header from './common/header';
+import Header from './common/headerContainer';
+
 import routes from '../routes';
+
+import MenuComponent from '../components/common/menuComponent';
+
+import css from './app.css';
 
 import {
 	userLogin,
@@ -71,7 +76,12 @@ class App extends React.Component {
 							{Header({
 								isFetching: this.props.isFetching
 							})}
-							{routes}
+							{this.state.user && (
+								<div className={css.sidebar}>
+									<MenuComponent />
+								</div>
+							)}
+							<div className={css.mainContent}>{routes}</div>
 						</div>
 					</ConnectedRouter>
 				</div>

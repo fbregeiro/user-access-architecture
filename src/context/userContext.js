@@ -6,7 +6,7 @@ export const user = {
 	fullName: null,
 	email: null,
 	token: null,
-	userAccess: {}
+	userAccess: []
 };
 
 export const UserContext = React.createContext({

@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
 // Validation
-import { loginValidate } from '../../utils/validation';
+import { resetPasswordValidate } from '../../utils/validation';
 
 // Styles and assets
 import styles from '../../styles/styles.css';
-import css from './loginComponent.css';
+import css from './resetPasswordComponent.css';
 
-class LoginComponent extends Component {
+class ResetPasswordComponent extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
 			<Form onSubmit={handleSubmit} className={css.form}>
-				<h4>Informe suas credencias para acessar a plataforma</h4>
+				<h4>
+					Informe seu e-mail e te enviaremos um link seguro para que possa
+					reiniciar sua senha
+				</h4>
 				<div className={css.field}>
 					<h5>E-Mail:</h5>
 					<Field
@@ -27,22 +30,12 @@ class LoginComponent extends Component {
 					/>
 				</div>
 				<div className={css.field}>
-					<h5>Senha:</h5>
-					<Field
-						type="password"
-						component="input"
-						placeholder="Senha"
-						name="password"
-						className={css.input}
-					/>
-				</div>
-				<div className={css.field}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}
 						className={styles.primaryButton}>
 						<span key={1} className={styles.primaryButtonLabel}>
-							Login
+							Solicitar reinicialização de senha
 						</span>
 					</button>
 				</div>
@@ -51,16 +44,16 @@ class LoginComponent extends Component {
 	}
 }
 
-LoginComponent.propTypes = {
+ResetPasswordComponent.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
-const LoginForm = reduxForm({
-	form: 'loginForm',
-	validate: loginValidate,
+const ResetPasswordForm = reduxForm({
+	form: 'resetPasswordForm',
+	validate: resetPasswordValidate,
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(LoginComponent);
+})(ResetPasswordComponent);
 
-export default LoginForm;
+export default ResetPasswordForm;

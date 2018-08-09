@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Loader from '../../components/common/loader';
-import MenuComponent from '../../components/common/menuComponent';
+import LoaderComponent from '../../components/common/loaderComponent';
+import HeaderComponent from '../../components/common/headerComponent';
 
 const spinner = {
 	color: '#000',
@@ -13,8 +13,8 @@ const spinner = {
 
 const HeaderPage = props => (
 	<div>
-		<MenuComponent />
-		<Loader id="spinner" {...spinner} loading={props.isFetching} />
+		<LoaderComponent id="spinner" {...spinner} loading={props.isFetching} />
+		<HeaderComponent />
 	</div>
 );
 

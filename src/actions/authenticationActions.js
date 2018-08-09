@@ -25,7 +25,7 @@ export const userLogin = ({ email, password }) => async dispatch => {
 					email: iLoginResponse.data.user.email,
 					fullName: iLoginResponse.data.user.fullName,
 					token: iLoginResponse.data.token,
-					user_access: iLoginResponse.data.userAccess
+					userAccess: iLoginResponse.data.userAccess
 				};
 
 				saveData(AUTHENTICATION_DATA, authenticationData);

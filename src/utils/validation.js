@@ -21,3 +21,18 @@ export const loginValidate = values => {
 
 	return errors;
 };
+
+export const resetPasswordValidate = values => {
+	const { email } = messages;
+	const errors = {};
+
+	if (!values.email) {
+		errors.email = email.required;
+	}
+
+	if (values.email && validEmail(values.email)) {
+		errors.email = email.invalid;
+	}
+
+	return errors;
+};

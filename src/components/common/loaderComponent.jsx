@@ -22,7 +22,7 @@ const rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 
 const bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
-class Loader extends Component {
+class LoaderComponent extends Component {
 	getBallStyle(size) {
 		return {
 			backgroundColor: this.props.color,
@@ -88,11 +88,11 @@ class Loader extends Component {
 	}
 }
 
-Loader.propTypes = {
+LoaderComponent.propTypes = {
 	loading: PropTypes.bool,
 	color: PropTypes.string,
 	size: PropTypes.number,
 	margin: PropTypes.string
 };
 
-export default Loader;
+export default LoaderComponent;
