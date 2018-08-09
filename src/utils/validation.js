@@ -36,3 +36,23 @@ export const resetPasswordValidate = values => {
 
 	return errors;
 };
+
+export const passwordActivationValidate = values => {
+	const { token, password } = messages;
+	const errors = {};
+
+	if (!values.token) {
+		errors.token = token.required;
+	}
+
+	if (!values.password) {
+		errors.password = password.required;
+	}
+
+	if (values.password !== values.passwordConfirmation) {
+		errors.password = password.doNotMatchConfirmation;
+		errors.passwordConfirmation = password.doNotMatchConfirmation;
+	}
+
+	return errors;
+};

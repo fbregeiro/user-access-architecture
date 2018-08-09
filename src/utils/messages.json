@@ -6,5 +6,8 @@
 	"password": {
 		"required": "Senha é obrigatório",
 		"doNotMatchConfirmation": "Senha e confirmação devem ser iguais."
+	},
+	"token" : {
+		"required": "Código é obrigatório"
 	}
 }
