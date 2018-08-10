@@ -56,3 +56,31 @@ export const passwordActivationValidate = values => {
 
 	return errors;
 };
+
+export const accountActivationValidate = values => {
+	const { accessCode, email, password } = messages;
+	const errors = {};
+
+	if (!values.accessCode) {
+		errors.accessCode = accessCode.required;
+	}
+
+	if (!values.email) {
+		errors.email = email.required;
+	}
+
+	if (values.email && validEmail(values.email)) {
+		errors.email = email.invalid;
+	}
+
+	if (!values.password) {
+		errors.password = password.required;
+	}
+
+	if (values.password !== values.passwordConfirmation) {
+		errors.password = password.doNotMatchConfirmation;
+		errors.passwordConfirmation = password.doNotMatchConfirmation;
+	}
+
+	return errors;
+};

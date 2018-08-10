@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import loginContainer from './containers/auth/loginContainer';
 import resetPasswordContainer from './containers/auth/resetPasswordContainer';
 import passwordActivationContainer from './containers/auth/passwordActivationContainer';
+import accountActivationContainer from './containers/auth/accountActivationContainer';
 import dashboardContainer from './containers/dashboard/dashboardContainer';
 import usersContainer from './containers/admin/users/usersContainer';
 
@@ -36,6 +37,11 @@ export default (
 			<Route exact path="/" component={null} />
 			<Route exact path="/login" component={loginContainer} />
 			<Route exact path="/reset-password" component={resetPasswordContainer} />
+			<Route
+				exact
+				path="/account-activation"
+				component={accountActivationContainer}
+			/>
 			<Route
 				exact
 				path="/password-activation"

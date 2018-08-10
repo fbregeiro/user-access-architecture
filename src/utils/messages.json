@@ -9,5 +9,8 @@
 	},
 	"token" : {
 		"required": "Código é obrigatório"
+	},
+	"accessCode" : {
+		"required" : "Código de Convite é obrigatório"
 	}
 }
