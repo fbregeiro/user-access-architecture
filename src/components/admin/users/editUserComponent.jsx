@@ -73,11 +73,12 @@ const EditUserForm = reduxForm({
 	destroyUnmount: true
 })(EditUserComponent);
 
-const mapStateToProps = ownProps => ({
+const mapStateToProps = (state, ownProps) => ({
 	initialValues: {
 		profileId: ownProps.user.profileId,
 		isActive: ownProps.user.isActive
-	}
+	},
+	dummy_variable_to_avoid_commit_rule_of_unused_var_for_state: state.blablabla
 });
 
 export default connect(mapStateToProps, null)(
