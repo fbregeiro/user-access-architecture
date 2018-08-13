@@ -12,8 +12,35 @@ import {
 import css from './profilesContainer.css';
 
 class ProfilesContainer extends Component {
+	constructor(props) {
+		super(props);
+		this.handleEditProfile = this.handleEditProfile.bind(this);
+		this.handleChangeFilter = this.handleChangeFilter.bind(this);
+
+		this.state = {
+			selectedProfile: {},
+			profilesFilteredList: this.props.profiles
+		};
+	}
 	componentDidMount() {
-		this.props.getProfilesByStatus();
+		this.getProfiles();
+	}
+
+	getProfiles() {
+		this.props.getProfilesByStatus().then(() => {
+			this.setState({ profilesFilteredList: this.props.profiles });
+		});
+	}
+
+	handleChangeFilter(event) {
+		var filterValue = event ? event.target.value : '';
+		var filteredList = this.props.profiles;
+		filteredList = filteredList.filter(
+			profile =>
+				profile.description.toLowerCase().indexOf(filterValue.toLowerCase()) >
+				-1
+		);
+		this.setState({ profilesFilteredList: filteredList });
 	}
 
 	handleEditProfile(profile) {
@@ -22,7 +49,6 @@ class ProfilesContainer extends Component {
 	}
 
 	render() {
-		const { profiles } = this.props;
 		return (
 			<div>
 				<h3>Gestão de Perfis</h3>
@@ -34,6 +60,7 @@ class ProfilesContainer extends Component {
 							placeholder="Filtro por coincidência"
 							name="filter"
 							className={css.input}
+							onChange={this.handleChangeFilter}
 						/>
 					</div>
 					<div className={[css.column, css.width20].join(' ')}>
@@ -41,7 +68,7 @@ class ProfilesContainer extends Component {
 					</div>
 				</div>
 				<ProfilesComponent
-					profiles={profiles || []}
+					profiles={this.state.profilesFilteredList || []}
 					handleEditProfile={this.handleEditProfile}
 				/>
 			</div>

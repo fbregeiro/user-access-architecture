@@ -25,7 +25,6 @@ class UsersContainer extends Component {
 
 		this.state = {
 			selectedUser: {},
-			filter: '',
 			usersFilteredList: this.props.users
 		};
 		this.props.getProfilesByStatus(true);
