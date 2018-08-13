@@ -23,12 +23,9 @@ describe('test - userActions/getUsersByStatus()', () => {
 			const usersList = actions[1];
 			expect(usersList).toBeDefined();
 			expect(usersList.payload).toBeDefined();
-			expect(usersList.payload.data).toBeDefined();
-			expect(usersList.payload.data.length).toEqual(2);
-			expect(usersList.payload.data[0].fullName).toEqual('Freddie Bregeiro');
-			expect(usersList.payload.data[1].fullName).toEqual(
-				'Leandro Amaral Ferreira'
-			);
+			expect(usersList.payload.length).toEqual(2);
+			expect(usersList.payload[0].fullName).toEqual('Freddie Bregeiro');
+			expect(usersList.payload[1].fullName).toEqual('Leandro Amaral Ferreira');
 		});
 	});
 });
@@ -49,8 +46,7 @@ describe('test - userActions/getUserById()', () => {
 			const usersList = actions[1];
 			expect(usersList).toBeDefined();
 			expect(usersList.payload).toBeDefined();
-			expect(usersList.payload.data).toBeDefined();
-			expect(usersList.payload.data.fullName).toEqual('Freddie Bregeiro');
+			expect(usersList.payload.fullName).toEqual('Freddie Bregeiro');
 		});
 	});
 });
@@ -75,8 +71,7 @@ describe('test - userActions/createUserByInvitation()', () => {
 				const usersList = actions[1];
 				expect(usersList).toBeDefined();
 				expect(usersList.payload).toBeDefined();
-				expect(usersList.payload.data).toBeDefined();
-				expect(usersList.payload.data.fullName).toEqual('Freddie Bregeiro');
+				expect(usersList.payload.fullName).toEqual('Freddie Bregeiro');
 			});
 	});
 });
@@ -87,23 +82,20 @@ describe('test - userActions/updateUser()', () => {
 
 		const iUser = { id: 1, fullName: 'Freddie Bregeiro' };
 
-		return store
-			.dispatch(userActions.updateUserByInvitation(iUser))
-			.then(() => {
-				const actions = store.getActions();
+		return store.dispatch(userActions.updateUser(iUser)).then(() => {
+			const actions = store.getActions();
 
-				// Expecting to receive BEGIN_AJAX_CALL + UPDATE_USER.
-				expect(actions.length).toEqual(2);
-				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.UPDATE_USER);
+			// Expecting to receive BEGIN_AJAX_CALL + UPDATE_USER.
+			expect(actions.length).toEqual(2);
+			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
+			expect(actions[1].type).toEqual(types.UPDATE_USER);
 
-				// Expect to receive 1 record from mocked api.
-				const usersList = actions[1];
-				expect(usersList).toBeDefined();
-				expect(usersList.payload).toBeDefined();
-				expect(usersList.payload.data).toBeDefined();
-				expect(usersList.payload.data.fullName).toEqual('Freddie Bregeiro');
-			});
+			// Expect to receive 1 record from mocked api.
+			const usersList = actions[1];
+			expect(usersList).toBeDefined();
+			expect(usersList.payload).toBeDefined();
+			expect(usersList.payload.fullName).toEqual('Freddie Bregeiro');
+		});
 	});
 });
 

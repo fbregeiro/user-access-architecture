@@ -84,3 +84,36 @@ export const accountActivationValidate = values => {
 
 	return errors;
 };
+
+export const createUserByInvitationValidate = values => {
+	const { email, fullName, profile } = messages;
+	const errors = {};
+
+	if (!values.fullName) {
+		errors.fullName = fullName.required;
+	}
+
+	if (!values.email) {
+		errors.email = email.required;
+	}
+
+	if (values.email && validEmail(values.email)) {
+		errors.email = email.invalid;
+	}
+
+	if (!values.profileId) {
+		errors.profileId = profile.required;
+	}
+
+	return errors;
+};
+
+export const updateUserValidate = values => {
+	const { profile } = messages;
+	const errors = {};
+
+	if (!values.profileId) {
+		errors.profileId = profile.required;
+	}
+	return errors;
+};

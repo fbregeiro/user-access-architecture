@@ -12,5 +12,11 @@
 	},
 	"accessCode" : {
 		"required" : "Código de Convite é obrigatório"
+	},
+	"fullName" : {
+		"required" : "Nome Completo é obrigatório"
+	},
+	"profile" : {
+		"required" : "Perfil é obrigatório"
 	}
 }

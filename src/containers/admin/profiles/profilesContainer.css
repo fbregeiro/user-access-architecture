@@ -1,0 +1,30 @@
+.header {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	display: flex;
+}
+
+.width80 {
+	width: 80%;
+}
+
+.width20 {
+	width: 20%;
+}
+
+input {
+	height: 30px;
+	border: 1px solid black;
+	padding-left: 5px;
+	margin-left: 0px;
+}
+
+button {
+	height: 30px;
+	border: 1px solid black;
+	padding-left: 5px;
+	margin-left: 0px;
+}

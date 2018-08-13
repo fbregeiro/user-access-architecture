@@ -23,9 +23,8 @@ describe('test - utilsActions/getSitemapOptions()', () => {
 			const profilesList = actions[1];
 			expect(profilesList).toBeDefined();
 			expect(profilesList.payload).toBeDefined();
-			expect(profilesList.payload.data).toBeDefined();
-			expect(profilesList.payload.data.id).toEqual(1);
-			expect(profilesList.payload.data.title).toEqual('Administrador');
+			expect(profilesList.payload.id).toEqual(1);
+			expect(profilesList.payload.title).toEqual('Administrador');
 		});
 	});
 });
@@ -50,8 +49,7 @@ describe('test - utilsActions/uploadFile()', () => {
 				const iFileUploadResponse = actions[1];
 				expect(iFileUploadResponse).toBeDefined();
 				expect(iFileUploadResponse.payload).toBeDefined();
-				expect(iFileUploadResponse.payload.data).toBeDefined();
-				expect(iFileUploadResponse.payload.data.isSuccess).toEqual(true);
+				expect(iFileUploadResponse.payload.isSuccess).toEqual(true);
 			});
 	});
 });

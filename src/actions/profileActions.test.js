@@ -23,11 +23,10 @@ describe('test - profileActions/getProfilesByStatus()', () => {
 			const profilesList = actions[1];
 			expect(profilesList).toBeDefined();
 			expect(profilesList.payload).toBeDefined();
-			expect(profilesList.payload.data).toBeDefined();
-			expect(profilesList.payload.data.length).toEqual(3);
-			expect(profilesList.payload.data[0].description).toEqual('Administrador');
-			expect(profilesList.payload.data[1].description).toEqual('Gerente');
-			expect(profilesList.payload.data[2].description).toEqual('Operador');
+			expect(profilesList.payload.length).toEqual(3);
+			expect(profilesList.payload[0].description).toEqual('Administrador');
+			expect(profilesList.payload[1].description).toEqual('Gerente');
+			expect(profilesList.payload[2].description).toEqual('Operador');
 		});
 	});
 });
@@ -48,8 +47,7 @@ describe('test - profileActions/getProfileById()', () => {
 			const usersList = actions[1];
 			expect(usersList).toBeDefined();
 			expect(usersList.payload).toBeDefined();
-			expect(usersList.payload.data).toBeDefined();
-			expect(usersList.payload.data.description).toEqual('Administrador');
+			expect(usersList.payload.description).toEqual('Administrador');
 		});
 	});
 });
@@ -72,8 +70,7 @@ describe('test - profileActions/createProfile()', () => {
 			const profile = actions[1];
 			expect(profile).toBeDefined();
 			expect(profile.payload).toBeDefined();
-			expect(profile.payload.data).toBeDefined();
-			expect(profile.payload.data.description).toEqual('Administrador');
+			expect(profile.payload.description).toEqual('Administrador');
 		});
 	});
 });
@@ -98,8 +95,7 @@ describe('test - profileActions/updateProfile()', () => {
 				const profile = actions[1];
 				expect(profile).toBeDefined();
 				expect(profile.payload).toBeDefined();
-				expect(profile.payload.data).toBeDefined();
-				expect(profile.payload.data.description).toEqual('Administrador');
+				expect(profile.payload.description).toEqual('Administrador');
 			});
 	});
 });

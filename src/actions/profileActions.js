@@ -14,7 +14,7 @@ export const getProfilesByStatus = isActive => async dispatch => {
 
 		dispatch({
 			type: GET_PROFILES_BY_STATUS,
-			payload: iProfiles
+			payload: iProfiles.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -29,7 +29,7 @@ export const getProfileById = profileId => async dispatch => {
 
 		dispatch({
 			type: GET_PROFILE_BY_ID,
-			payload: iProfile
+			payload: iProfile.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -44,7 +44,7 @@ export const createProfile = iProfileRequest => async dispatch => {
 
 		dispatch({
 			type: CREATE_PROFILE,
-			payload: iProfile
+			payload: iProfile.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -59,7 +59,7 @@ export const updateProfile = iProfileRequest => async dispatch => {
 
 		dispatch({
 			type: UPDATE_PROFILE,
-			payload: iProfile
+			payload: iProfile.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));

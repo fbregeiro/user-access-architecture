@@ -7,8 +7,17 @@ import css from './menuComponent.css';
 export default function MenuComponent() {
 	return (
 		<UserContext.Consumer>
-			{({ user }) => (
+			{({ user, performLogout }) => (
 				<ol className={css['tree-list']}>
+					<p>{user.fullName}</p>
+					<NavLink to="/my-profile">
+						<p>Perfil</p>
+					</NavLink>
+					<a href="#" onClick={performLogout}>
+						Sair
+					</a>
+					<br />
+					<br />
 					{user &&
 						user.userAccess &&
 						user.userAccess.map(section => (
@@ -30,7 +39,7 @@ export default function MenuComponent() {
 												<label htmlFor={menu.menuName}>{menu.menuName}</label>
 											)}
 											{menu.subMenus.length === 0 && (
-												<a key={menu.menuName}>{menu.menuName}</a>
+												<NavLink to={menu.route}>{menu.menuName}</NavLink>
 											)}
 											<input id={menu.menuName} type="checkbox" />
 											<ul>

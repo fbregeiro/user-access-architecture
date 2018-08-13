@@ -15,7 +15,7 @@ export const getUsersByStatus = isActive => async dispatch => {
 
 		dispatch({
 			type: GET_USERS_BY_STATUS,
-			payload: iUsers
+			payload: iUsers.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -30,7 +30,7 @@ export const getUserById = userId => async dispatch => {
 
 		dispatch({
 			type: GET_USER_BY_ID,
-			payload: iUser
+			payload: iUser.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -45,7 +45,7 @@ export const createUserByInvitation = iUser => async dispatch => {
 
 		dispatch({
 			type: CREATE_USER_BY_INVITATION,
-			payload: iUser
+			payload: iUser.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -53,14 +53,14 @@ export const createUserByInvitation = iUser => async dispatch => {
 	}
 };
 
-export const updateUserByInvitation = iUser => async dispatch => {
+export const updateUser = iUser => async dispatch => {
 	dispatch(beginAjaxCall());
 	try {
 		iUser = await api.updateUser(iUser);
 
 		dispatch({
 			type: UPDATE_USER,
-			payload: iUser
+			payload: iUser.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));

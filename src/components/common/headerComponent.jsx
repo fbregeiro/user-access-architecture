@@ -7,22 +7,14 @@ import css from './headerComponent.css';
 export default function HeaderComponent() {
 	return (
 		<UserContext.Consumer>
-			{({ user, performLogout }) => (
+			{({ user }) => (
 				<div className={css.header}>
 					<div className={css.logo}>
 						<Link to="/">
 							<img src={require('../../assets/images/logo.jpeg')} />
 						</Link>
 					</div>
-					{user && (
-						<div className={css.user}>
-							{user && 'Bem vindo, ' + user.fullName}!
-							<br />
-							<a href="#" onClick={performLogout}>
-								Sair
-							</a>
-						</div>
-					)}
+					{user && <div className={css.user}>User Access Architecture</div>}
 					{!user && (
 						<div className={css.user}>
 							<Link to="/login">Entrar</Link>

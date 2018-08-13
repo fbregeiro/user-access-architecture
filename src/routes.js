@@ -1,14 +1,20 @@
+// React
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+// Context
+import { UserContext } from './context/userContext';
+
+// Routes
 import loginContainer from './containers/auth/loginContainer';
 import resetPasswordContainer from './containers/auth/resetPasswordContainer';
 import passwordActivationContainer from './containers/auth/passwordActivationContainer';
 import accountActivationContainer from './containers/auth/accountActivationContainer';
 import dashboardContainer from './containers/dashboard/dashboardContainer';
+import myProfileContainer from './containers/auth/myProfileContainer';
 import usersContainer from './containers/admin/users/usersContainer';
-
-import { UserContext } from './context/userContext';
+import newUserContainer from './containers/admin/users/newUserContainer';
+import profilesContainer from './containers/admin/profiles/profilesContainer';
 
 function PrivateRoute({ component: Component, ...rest }) {
 	return (
@@ -48,7 +54,10 @@ export default (
 				component={passwordActivationContainer}
 			/>
 			<PrivateRoute path="/dashboard" component={dashboardContainer} />
-			<PrivateRoute path="/admin/users" component={usersContainer} />
+			<PrivateRoute path="/my-profile" component={myProfileContainer} />
+			<PrivateRoute path="/users" component={usersContainer} />
+			<PrivateRoute path="/new-user" component={newUserContainer} />
+			<PrivateRoute path="/profiles" component={profilesContainer} />
 		</Switch>
 	</div>
 );

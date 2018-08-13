@@ -9,7 +9,7 @@ export const getSitemapsOptions = () => async dispatch => {
 
 		dispatch({
 			type: GET_SITEMAP_OPTIONS,
-			payload: iSitemaps
+			payload: iSitemaps.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
