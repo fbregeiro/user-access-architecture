@@ -21,14 +21,33 @@ class UsersContainer extends Component {
 		this.handleEditUser = this.handleEditUser.bind(this);
 		this.handleSaveNewUser = this.handleSaveNewUser.bind(this);
 		this.handleSaveExistingUser = this.handleSaveExistingUser.bind(this);
+		this.handleChangeFilter = this.handleChangeFilter.bind(this);
 
 		this.state = {
-			selectedUser: {}
+			selectedUser: {},
+			filter: '',
+			usersFilteredList: this.props.users
 		};
 		this.props.getProfilesByStatus(true);
 	}
 	componentDidMount() {
-		this.props.getUsersByStatus();
+		this.getUsers();
+	}
+
+	getUsers() {
+		this.props.getUsersByStatus().then(() => {
+			this.setState({ usersFilteredList: this.props.users });
+		});
+	}
+
+	handleChangeFilter(event) {
+		var filterValue = event ? event.target.value : '';
+		var filteredList = this.props.users;
+		filteredList = filteredList.filter(
+			user =>
+				user.fullName.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
+		);
+		this.setState({ usersFilteredList: filteredList });
 	}
 
 	handleShowNewUserModal() {
@@ -42,7 +61,7 @@ class UsersContainer extends Component {
 
 	handleSaveNewUser(user) {
 		this.props.createUserByInvitation(user).then(() => {
-			this.props.getUsersByStatus();
+			this.getUsers();
 			window.location.hash = '#modal-close';
 		});
 	}
@@ -55,7 +74,7 @@ class UsersContainer extends Component {
 	}
 
 	render() {
-		const { users, profiles } = this.props;
+		const { profiles } = this.props;
 		return (
 			<div>
 				<h3>Gestão de Usuários</h3>
@@ -70,6 +89,7 @@ class UsersContainer extends Component {
 							placeholder="Filtro por coincidência"
 							name="filter"
 							className={css.input}
+							onChange={this.handleChangeFilter}
 						/>
 					</div>
 					<div className={[css.column, css.width20].join(' ')}>
@@ -82,7 +102,7 @@ class UsersContainer extends Component {
 					</div>
 				</div>
 				<UsersComponent
-					users={users || []}
+					users={this.state.usersFilteredList || []}
 					handleEditUser={this.handleEditUser}
 				/>
 				<div id="open-edit-user-modal" className={css['modal-window']}>
