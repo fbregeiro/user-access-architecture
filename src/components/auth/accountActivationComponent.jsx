@@ -26,7 +26,7 @@ class AccountActivationComponent extends Component {
 						component="input"
 						placeholder="Convite"
 						name="accessCode"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -36,7 +36,7 @@ class AccountActivationComponent extends Component {
 						component="input"
 						placeholder="E-Mail"
 						name="email"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -46,7 +46,7 @@ class AccountActivationComponent extends Component {
 						component="input"
 						placeholder="Senha"
 						name="password"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -56,17 +56,15 @@ class AccountActivationComponent extends Component {
 						component="input"
 						placeholder="Confirmação de Senha"
 						name="passwordConfirmation"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}
-						className={styles.primaryButton}>
-						<span key={1} className={styles.primaryButtonLabel}>
-							Cadastrar
-						</span>
+						className={styles.basicbutton}>
+						Cadastrar
 					</button>
 				</div>
 			</Form>

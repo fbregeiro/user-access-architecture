@@ -14,6 +14,7 @@ import {
 import { getProfilesByStatus } from '../../../actions/profileActions';
 
 import css from './usersContainer.css';
+import styles from '../../../styles/styles.css';
 
 class UsersContainer extends Component {
 	constructor(props) {
@@ -87,17 +88,16 @@ class UsersContainer extends Component {
 							type="text"
 							placeholder="Filtro por coincidência"
 							name="filter"
-							className={css.input}
+							className={styles.basicinput}
 							onChange={this.handleChangeFilter}
 						/>
 					</div>
 					<div className={[css.column, css.width20].join(' ')}>
-						<input
-							type="button"
-							value="Convidar Usuário"
-							className={css.button}
+						<button
 							onClick={this.handleShowNewUserModal}
-						/>
+							className={styles.basicbutton}>
+							Convidar Usuário
+						</button>
 					</div>
 				</div>
 				<UsersComponent

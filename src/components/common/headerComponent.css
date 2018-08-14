@@ -6,12 +6,12 @@
 .logo {
 	display: flex;
 	flex: 0;
-	padding-left: 1rem;
+	padding-left: 75px;
 }
 
 .logo img {
-	width: 140px;
-	height: 70px;
+	width: 100px;
+	height: 50px;
 }
 
 .user {

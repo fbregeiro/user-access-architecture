@@ -26,7 +26,7 @@ class PasswordActivationComponent extends Component {
 						component="input"
 						placeholder="Código"
 						name="token"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -36,7 +36,7 @@ class PasswordActivationComponent extends Component {
 						component="input"
 						placeholder="Senha"
 						name="password"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -46,17 +46,15 @@ class PasswordActivationComponent extends Component {
 						component="input"
 						placeholder="Confirmação de Senha"
 						name="passwordConfirmation"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}
-						className={styles.primaryButton}>
-						<span key={1} className={styles.primaryButtonLabel}>
-							Alterar
-						</span>
+						className={styles.basicbutton}>
+						Alterar
 					</button>
 				</div>
 			</Form>

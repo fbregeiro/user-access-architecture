@@ -14,6 +14,7 @@ import {
 import { getSitemapsOptions } from '../../../actions/utilsActions';
 
 import css from './profilesContainer.css';
+import styles from '../../../styles/styles.css';
 
 class ProfilesContainer extends Component {
 	constructor(props) {
@@ -86,7 +87,7 @@ class ProfilesContainer extends Component {
 							type="text"
 							placeholder="Filtro por coincidência"
 							name="filter"
-							className={css.input}
+							className={styles.basicinput}
 							onChange={this.handleChangeFilter}
 						/>
 					</div>
@@ -94,7 +95,7 @@ class ProfilesContainer extends Component {
 						<input
 							type="button"
 							value="Novo perfil"
-							className={css.button}
+							className={styles.basicinput}
 							onClick={this.handleShowNewProfileModal}
 						/>
 					</div>
