@@ -21,7 +21,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 					component="input"
 					placeholder="Nome Completo"
 					name="fullName"
-					className={css.input}
+					className={styles.basicinput}
 				/>
 			</div>
 			<div className={css.field}>
@@ -31,7 +31,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 					component="input"
 					placeholder="E-mail"
 					name="email"
-					className={css.input}
+					className={styles.basicinput}
 				/>
 			</div>
 			<div className={css.field}>
@@ -49,10 +49,8 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 				<button
 					type="submit"
 					disabled={pristine || submitting}
-					className={styles.primaryButton}>
-					<span key={1} className={styles.primaryButtonLabel}>
-						Salvar
-					</span>
+					className={styles.basicbutton}>
+					Salvar
 				</button>
 			</div>
 		</Form>

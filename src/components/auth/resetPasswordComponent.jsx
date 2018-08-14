@@ -26,17 +26,15 @@ class ResetPasswordComponent extends Component {
 						component="input"
 						placeholder="E-mail"
 						name="email"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}
-						className={styles.primaryButton}>
-						<span key={1} className={styles.primaryButtonLabel}>
-							Solicitar reinicialização de senha
-						</span>
+						className={styles.basicbutton}>
+						Solicitar reinicialização de senha
 					</button>
 				</div>
 			</Form>

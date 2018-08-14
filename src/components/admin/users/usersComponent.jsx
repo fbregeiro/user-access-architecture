@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//import css from './usersComponent.css';
+import styles from '../../../styles/styles.css';
 
 function UsersComponent({ users, handleEditUser }) {
 	return (
-		<table id="t">
+		<table id="t" className={styles.basictable}>
 			<thead>
 				<tr>
 					<th>Nome</th>
@@ -25,7 +25,11 @@ function UsersComponent({ users, handleEditUser }) {
 						<td>{user.profile.description}</td>
 						<td>{user.isActive ? 'Ativo' : 'Inativo'}</td>
 						<td>
-							<button onClick={() => handleEditUser(user)}>Editar</button>
+							<button
+								onClick={() => handleEditUser(user)}
+								className={styles.basicbutton}>
+								Editar
+							</button>
 						</td>
 					</tr>
 				))}

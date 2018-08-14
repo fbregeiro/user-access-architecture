@@ -21,7 +21,7 @@
 	cursor: pointer;
 }
 .tree-list label:after {
-	content: "+";
+	/* content: "+"; */
 	position: static;
 }
 

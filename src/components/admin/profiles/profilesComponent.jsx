@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //import css from './profilesComponent.css';
+import styles from '../../../styles/styles.css';
 
 function ProfilesComponent({ profiles, handleEditProfile }) {
 	return (
-		<table id="t">
+		<table id="t" className={styles.basictable}>
 			<thead>
 				<tr>
 					<th>Nome</th>
@@ -25,7 +26,11 @@ function ProfilesComponent({ profiles, handleEditProfile }) {
 						<td>{profile.isSystemProtected ? 'Sim' : 'Não'}</td>
 						<td>{profile.isActive ? 'Ativo' : 'Inativo'}</td>
 						<td>
-							<button onClick={() => handleEditProfile(profile)}>Editar</button>
+							<button
+								onClick={() => handleEditProfile(profile)}
+								className={styles.basicbutton}>
+								Editar
+							</button>
 						</td>
 					</tr>
 				))}

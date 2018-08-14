@@ -10,6 +10,7 @@ import {
 } from '../../../actions/profileActions';
 
 import css from './profilesContainer.css';
+import styles from '../../../styles/styles.css';
 
 class ProfilesContainer extends Component {
 	componentDidMount() {
@@ -33,11 +34,11 @@ class ProfilesContainer extends Component {
 							type="text"
 							placeholder="Filtro por coincidência"
 							name="filter"
-							className={css.input}
+							className={styles.basicinput}
 						/>
 					</div>
 					<div className={[css.column, css.width20].join(' ')}>
-						<input type="button" value="Novo Perfil" className={css.button} />
+						<button className={styles.basicbutton}>Novo Perfil</button>
 					</div>
 				</div>
 				<ProfilesComponent

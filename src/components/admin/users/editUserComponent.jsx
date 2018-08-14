@@ -50,10 +50,8 @@ function EditUserComponent({
 				<button
 					type="submit"
 					disabled={pristine || submitting}
-					className={styles.primaryButton}>
-					<span key={1} className={styles.primaryButtonLabel}>
-						Salvar
-					</span>
+					className={styles.basicbutton}>
+					Salvar
 				</button>
 			</div>
 		</Form>

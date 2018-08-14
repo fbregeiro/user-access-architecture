@@ -23,7 +23,7 @@ class LoginComponent extends Component {
 						component="input"
 						placeholder="E-mail"
 						name="email"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
@@ -33,17 +33,15 @@ class LoginComponent extends Component {
 						component="input"
 						placeholder="Senha"
 						name="password"
-						className={css.input}
+						className={styles.basicinput}
 					/>
 				</div>
 				<div className={css.field}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}
-						className={styles.primaryButton}>
-						<span key={1} className={styles.primaryButtonLabel}>
-							Login
-						</span>
+						className={styles.basicbutton}>
+						Login
 					</button>
 				</div>
 			</Form>

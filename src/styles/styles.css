@@ -1,6 +1,19 @@
 /* Styles */
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: "Poppins", sans-serif;
+}
+body {
+	margin: 0;
+	font-size: 16px;
+}
+
 #app {
-	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 14px "Poppins", sans-serif;
 	color: #4d4d4d;
 	min-width: 550px;
 	max-width: 850px;
@@ -37,4 +50,47 @@ nav {
 
 .primaryButtonLabel {
 	color: #000000 !important;
+}
+
+/* Table */
+table.basictable {
+	margin-top: 10px;
+	font-size: 12px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.basictable th {
+	background-color: #f7f7f7;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: black;
+}
+table.basictable tr {
+	background-color: white;
+}
+table.basictable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: black;
+}
+
+/* Button */
+button.basicbutton {
+	font-family: "Poppins", sans-serif;
+	display: inline-block;
+	border: none;
+	color: #ffffff;
+	width: auto;
+	height: auto;
+	font-size: 12px;
+	padding: 10px 25px;
+	background-color: #7c7c7d;
+}
+
+input.basicinput {
+	font-family: "Poppins", sans-serif;
 }
