@@ -11,6 +11,8 @@ import {
 	updateProfile
 } from '../../../actions/profileActions';
 
+import { getSitemapsOptions } from '../../../actions/utilsActions';
+
 import css from './profilesContainer.css';
 
 class ProfilesContainer extends Component {
@@ -26,8 +28,10 @@ class ProfilesContainer extends Component {
 			profilesFilteredList: this.props.profiles
 		};
 	}
+
 	componentDidMount() {
 		this.getProfiles();
+		this.props.getSitemapsOptions();
 	}
 
 	getProfiles() {
@@ -52,7 +56,6 @@ class ProfilesContainer extends Component {
 	}
 
 	handleEditProfile(profile) {
-		// console.log('profilesContainer', 'handleEditProfile', 'profile', profile);
 		window.location.hash = '#open-edit-profile-modal';
 		this.setState({ selectedProfile: profile });
 	}
@@ -72,6 +75,7 @@ class ProfilesContainer extends Component {
 	}
 
 	render() {
+		const { sitemapOptions } = this.props;
 		return (
 			<div>
 				<h3>Gestão de Perfis</h3>
@@ -108,6 +112,7 @@ class ProfilesContainer extends Component {
 							<EditProfileForm
 								profile={this.state.selectedProfile}
 								onSubmit={this.handleSaveExistingProfile}
+								sitemapOptions={sitemapOptions}
 							/>
 						</div>
 					</div>
@@ -118,7 +123,10 @@ class ProfilesContainer extends Component {
 							X
 						</a>
 						<div>
-							<NewProfileForm onSubmit={this.handleSaveNewProfile} />
+							<NewProfileForm
+								onSubmit={this.handleSaveNewProfile}
+								sitemapOptions={sitemapOptions}
+							/>
 						</div>
 					</div>
 				</div>
@@ -128,11 +136,13 @@ class ProfilesContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-	profiles: state.admin.profiles
+	profiles: state.admin.profiles,
+	sitemapOptions: state.admin.sitemapOptions
 });
 
 const mapActionToProps = {
 	getProfilesByStatus,
+	getSitemapsOptions,
 	createProfile,
 	updateProfile
 };

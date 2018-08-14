@@ -19,7 +19,12 @@ export const renderToggleInput = field => (
 	/>
 );
 
-function NewProfileComponent({ handleSubmit, pristine, submitting }) {
+function NewProfileComponent({
+	sitemapOptions,
+	handleSubmit,
+	pristine,
+	submitting
+}) {
 	return (
 		<Form onSubmit={handleSubmit} className={css.form}>
 			<h4>Criar novo perfil</h4>
@@ -46,6 +51,16 @@ function NewProfileComponent({ handleSubmit, pristine, submitting }) {
 				<Field name="canEdit" id="canEdit" component={renderToggleInput} />
 			</div>
 			<div className={css.field}>
+				<Field name="sitemapIds" component="select" multiple={true}>
+					<option value="" />
+					{sitemapOptions.map(sitemapOption => (
+						<option key={sitemapOption.id} value={sitemapOption.id}>
+							{sitemapOption.title}
+						</option>
+					))}
+				</Field>
+			</div>
+			<div className={css.field}>
 				<button
 					type="submit"
 					disabled={pristine || submitting}
@@ -66,6 +81,7 @@ NewProfileComponent.propTypes = {
 const NewProfileForm = reduxForm({
 	form: 'newProfileForm',
 	validate: createProfileValidate,
+	initialValues: { sitemapIds: [] },
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true

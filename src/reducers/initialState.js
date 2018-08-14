@@ -5,6 +5,7 @@ export default {
 	},
 	admin: {
 		users: [],
-		profiles: []
+		profiles: [],
+		sitemapOptions: []
 	}
 };

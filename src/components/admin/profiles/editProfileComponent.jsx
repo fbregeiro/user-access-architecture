@@ -20,7 +20,13 @@ export const renderToggleInput = field => (
 	/>
 );
 
-function EditProfileComponent({ profile, handleSubmit, pristine, submitting }) {
+function EditProfileComponent({
+	profile,
+	sitemapOptions,
+	handleSubmit,
+	pristine,
+	submitting
+}) {
 	return (
 		<Form onSubmit={handleSubmit} className={css.form}>
 			<h4>Editar Perfil</h4>
@@ -46,6 +52,16 @@ function EditProfileComponent({ profile, handleSubmit, pristine, submitting }) {
 			<div className={css.field}>
 				<h5>Pode editar:</h5>
 				<Field name="canEdit" id="canEdit" component={renderToggleInput} />
+			</div>
+			<div className={css.field}>
+				<Field name="sitemapIds" component="select" multiple={true}>
+					<option value="" />
+					{sitemapOptions.map(sitemapOption => (
+						<option key={sitemapOption.id} value={sitemapOption.id}>
+							{sitemapOption.title}
+						</option>
+					))}
+				</Field>
 			</div>
 			<div className={css.field}>
 				<button
@@ -79,7 +95,8 @@ const mapStateToProps = (state, ownProps) => ({
 		description: ownProps.profile.description,
 		isActive: ownProps.profile.isActive,
 		canCreate: ownProps.profile.canCreate,
-		canEdit: ownProps.profile.canEdit
+		canEdit: ownProps.profile.canEdit,
+		sitemapIds: ownProps.profile.sitemapIds || []
 	},
 	dummy_variable_to_avoid_commit_rule_of_unused_var_for_state: state.blablabla
 });

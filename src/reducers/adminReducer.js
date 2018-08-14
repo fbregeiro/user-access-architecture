@@ -1,7 +1,8 @@
 import initialState from './initialState';
 import {
 	GET_USERS_BY_STATUS,
-	GET_PROFILES_BY_STATUS
+	GET_PROFILES_BY_STATUS,
+	GET_SITEMAP_OPTIONS
 } from '../actions/actionTypes';
 
 export default (state = initialState.admin, action) => {
@@ -16,6 +17,12 @@ export default (state = initialState.admin, action) => {
 			return {
 				...state,
 				profiles: action.payload
+			};
+		}
+		case GET_SITEMAP_OPTIONS: {
+			return {
+				...state,
+				sitemapOptions: action.payload
 			};
 		}
 		default:
