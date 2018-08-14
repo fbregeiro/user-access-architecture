@@ -138,3 +138,13 @@ export const updateProfileValidate = values => {
 	}
 	return errors;
 };
+
+export const saveMyProfileValidate = values => {
+	const { fullName } = messages;
+	const errors = {};
+
+	if (!values.fullName) {
+		errors.fullName = fullName.required;
+	}
+	return errors;
+};
