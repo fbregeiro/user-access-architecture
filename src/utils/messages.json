@@ -18,5 +18,8 @@
 	},
 	"profile" : {
 		"required" : "Perfil é obrigatório"
+	},
+	"description" : {
+		"required" : "Descrição é obrigatório"
 	}
 }

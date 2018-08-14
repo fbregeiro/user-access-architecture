@@ -117,3 +117,24 @@ export const updateUserValidate = values => {
 	}
 	return errors;
 };
+
+export const createProfileValidate = values => {
+	const { description } = messages;
+	const errors = {};
+
+	if (!values.description) {
+		errors.description = description.required;
+	}
+
+	return errors;
+};
+
+export const updateProfileValidate = values => {
+	const { profile } = messages;
+	const errors = {};
+
+	if (!values.profileId) {
+		errors.profileId = profile.required;
+	}
+	return errors;
+};

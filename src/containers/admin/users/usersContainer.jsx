@@ -67,7 +67,7 @@ class UsersContainer extends Component {
 
 	handleSaveExistingUser(user) {
 		this.props.updateUser(user).then(() => {
-			this.props.getUsersByStatus();
+			this.getUsers();
 			window.location.hash = '#modal-close';
 		});
 	}
