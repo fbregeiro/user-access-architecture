@@ -21,12 +21,8 @@ export const userLogin = ({ email, password }) => async dispatch => {
 		if (iLoginResponse && iLoginResponse.data) {
 			if (iLoginResponse.data.isSuccess) {
 				const authenticationData = {
-					userId: iLoginResponse.data.user.id,
-					email: iLoginResponse.data.user.email,
-					fullName: iLoginResponse.data.user.fullName,
-					documentNumber: iLoginResponse.data.user.documentNumber,
+					user: iLoginResponse.data.user,
 					token: iLoginResponse.data.token,
-					profile: iLoginResponse.data.user.profile,
 					userAccess: iLoginResponse.data.userAccess
 				};
 

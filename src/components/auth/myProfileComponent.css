@@ -23,3 +23,8 @@ h5 {
 	display: flex;
 	margin: 0px;
 }
+
+.userImage {
+	width: 250px;
+	height: auto;
+}

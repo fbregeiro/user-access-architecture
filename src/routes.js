@@ -19,11 +19,11 @@ import profilesContainer from './containers/admin/profiles/profilesContainer';
 function PrivateRoute({ component: Component, ...rest }) {
 	return (
 		<UserContext.Consumer>
-			{({ user }) => (
+			{({ token }) => (
 				<Route
 					{...rest}
 					render={props =>
-						user !== null && user.token !== null ? (
+						token !== null ? (
 							<Component {...props} />
 						) : (
 							<Redirect

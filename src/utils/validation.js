@@ -140,11 +140,31 @@ export const updateProfileValidate = values => {
 };
 
 export const saveMyProfileValidate = values => {
-	const { fullName } = messages;
+	const { fullName, email, document, password } = messages;
 	const errors = {};
 
 	if (!values.fullName) {
 		errors.fullName = fullName.required;
 	}
+
+	if (!values.email) {
+		errors.email = email.required;
+	}
+
+	if (values.email && validEmail(values.email)) {
+		errors.email = email.invalid;
+	}
+
+	if (!values.document) {
+		errors.document = document.required;
+	}
+
+	if (values.password) {
+		if (values.password !== values.passwordConfirmation) {
+			errors.password = password.doNotMatchConfirmation;
+			errors.passwordConfirmation = password.doNotMatchConfirmation;
+		}
+	}
+
 	return errors;
 };

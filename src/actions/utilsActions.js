@@ -22,7 +22,7 @@ export const uploadFile = (file, name) => async dispatch => {
 	try {
 		const iFileUploadResponse = await api.uploadFile(file, name);
 
-		dispatch({
+		return dispatch({
 			type: UPLOAD_FILE,
 			payload: iFileUploadResponse
 		});

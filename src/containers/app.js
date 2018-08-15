@@ -13,23 +13,14 @@ import MenuComponent from '../components/common/menuComponent';
 
 import css from './app.css';
 
-import {
-	userLogin,
-	userLogout,
-	AUTHENTICATION_DATA
-} from '../actions/authenticationActions';
-import { getData } from '../utils/persistency';
+import { userLogin, userLogout } from '../actions/authenticationActions';
 
+import { getAuthenticationData } from '../utils/auth';
 import { UserContext } from '../context/userContext';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.getUserInformation = () => {
-			const authenticationData = getData(AUTHENTICATION_DATA);
-			return authenticationData;
-		};
 
 		this.performLogout = () => {
 			this.props.userLogout().then(() => {
@@ -43,19 +34,21 @@ class App extends React.Component {
 
 		this.performLogin = values => {
 			this.props.userLogin(values).then(() => {
-				const user = this.getUserInformation();
+				const authenticationData = getAuthenticationData();
 				this.setState(state => ({
 					...state,
-					user: user
+					user: authenticationData.user
 				}));
 				history.push('/dashboard');
 			});
 		};
 
 		this.loadUserContext = () => {
-			const user = this.getUserInformation();
+			const authenticationData = getAuthenticationData();
 			this.state = {
-				user: user,
+				user: authenticationData ? authenticationData.user : null,
+				userAccess: authenticationData ? authenticationData.userAccess : null,
+				token: authenticationData ? authenticationData.token : null,
 				performLogout: this.performLogout,
 				performLogin: this.performLogin
 			};
