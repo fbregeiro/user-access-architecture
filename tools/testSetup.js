@@ -23,6 +23,7 @@ process.env.NODE_ENV = 'test';
 // before our tests run.
 require('babel-register')();
 require('babel-polyfill');
+require('mock-local-storage');
 
 // Disable webpack-specific features for tests since
 // Mocha doesn't know what to do with them.
@@ -59,4 +60,4 @@ global.navigator = {
 	userAgent: 'node.js'
 };
 
-documentRef = document; //eslint-disable-line no-undef
+// var documentRef = document; //eslint-disable-line no-undef

@@ -1,0 +1,28 @@
+{
+	"email": {
+		"required": "Email é obrigatório",
+		"invalid": "Email inválido"
+	},
+	"password": {
+		"required": "Senha é obrigatório",
+		"doNotMatchConfirmation": "Senha e confirmação devem ser iguais."
+	},
+	"token" : {
+		"required": "Código é obrigatório"
+	},
+	"accessCode" : {
+		"required" : "Código de Convite é obrigatório"
+	},
+	"fullName" : {
+		"required" : "Nome Completo é obrigatório"
+	},
+	"profile" : {
+		"required" : "Perfil é obrigatório"
+	},
+	"description" : {
+		"required" : "Descrição é obrigatório"
+	},
+	"document" : {
+		"required" : "Documento é obrigatório"
+	}
+}

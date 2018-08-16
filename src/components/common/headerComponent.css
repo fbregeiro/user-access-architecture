@@ -1,0 +1,22 @@
+.header {
+	display: flex;
+	background-color: #f7f7f7;
+}
+
+.logo {
+	display: flex;
+	flex: 0;
+	padding-left: 75px;
+}
+
+.logo img {
+	width: 100px;
+	height: 50px;
+}
+
+.user {
+	text-align: right;
+	flex: 1;
+	align-self: center;
+	padding-right: 1rem;
+}
