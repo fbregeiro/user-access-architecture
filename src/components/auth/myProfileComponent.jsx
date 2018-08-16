@@ -42,11 +42,15 @@ class MyProfileComponent extends Component {
 	render() {
 		const { user, handleSubmit, submitting } = this.props;
 		return (
-			<Form onSubmit={handleSubmit} className={css.form}>
+			<Form onSubmit={handleSubmit} className={styles.form}>
 				<h4>Meu Perfil</h4>
 				<img src={user.photoUrl} className={css.userImage} />
-				Trocar foto: <input type="file" onChange={this.handleFileUpload} />
-				<div className={css.field}>
+				<h4>Perfil: {user.profile.description}</h4>
+				<div className={styles.field}>
+					<h5>Trocar foto:</h5>
+					<input type="file" onChange={this.handleFileUpload} />
+				</div>
+				<div className={styles.field}>
 					<h5>Nome:</h5>
 					<Field
 						type="text"
@@ -56,7 +60,7 @@ class MyProfileComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<div className={css.field}>
+				<div className={styles.field}>
 					<h5>E-Mail:</h5>
 					<Field
 						type="text"
@@ -66,7 +70,7 @@ class MyProfileComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<div className={css.field}>
+				<div className={styles.field}>
 					<h5>Documento:</h5>
 					<Field
 						type="text"
@@ -76,9 +80,8 @@ class MyProfileComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<h5>Perfil: {user.profile.description}</h5>
-				<div className={css.field}>
-					<label htmlFor="changePassword">Trocar senha</label>
+				<div className={styles.field}>
+					<h5 htmlFor="changePassword">Trocar senha</h5>
 					<input
 						id="changePassword"
 						type="checkbox"
@@ -86,7 +89,7 @@ class MyProfileComponent extends Component {
 					/>
 				</div>
 				{this.state.changePassword && (
-					<div className={css.field}>
+					<div className={styles.field}>
 						<h5>Senha:</h5>
 						<Field
 							type="password"
@@ -98,7 +101,7 @@ class MyProfileComponent extends Component {
 					</div>
 				)}
 				{this.state.changePassword && (
-					<div className={css.field}>
+					<div className={styles.field}>
 						<h5>Confirmação de Senha:</h5>
 						<Field
 							type="password"
@@ -109,7 +112,7 @@ class MyProfileComponent extends Component {
 						/>
 					</div>
 				)}
-				<div className={css.field}>
+				<div className={styles.buttons}>
 					<button
 						type="submit"
 						disabled={submitting}

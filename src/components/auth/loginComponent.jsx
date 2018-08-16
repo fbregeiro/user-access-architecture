@@ -8,15 +8,14 @@ import { loginValidate } from '../../utils/validation';
 
 // Styles and assets
 import styles from '../../styles/styles.css';
-import css from './loginComponent.css';
 
 class LoginComponent extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
-			<Form onSubmit={handleSubmit} className={css.form}>
+			<Form onSubmit={handleSubmit} className={styles.form}>
 				<h4>Informe suas credencias para acessar a plataforma</h4>
-				<div className={css.field}>
+				<div className={styles.field}>
 					<h5>E-Mail:</h5>
 					<Field
 						type="text"
@@ -26,7 +25,7 @@ class LoginComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<div className={css.field}>
+				<div className={styles.field}>
 					<h5>Senha:</h5>
 					<Field
 						type="password"
@@ -36,7 +35,7 @@ class LoginComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<div className={css.field}>
+				<div className={styles.buttons}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}

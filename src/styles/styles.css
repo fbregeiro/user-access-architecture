@@ -91,6 +91,39 @@ button.basicbutton {
 	background-color: #7c7c7d;
 }
 
+/* Form */
+form.form {
+	border: 1px double #cccccc;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+}
+
+.form h4 {
+	align-self: center;
+	display: flex;
+	margin: 1rem;
+}
+
+div.field {
+	display: flex;
+	padding: 1rem;
+	width: 75%;
+}
+
 input.basicinput {
 	font-family: "Poppins", sans-serif;
+	min-width: 70%;
+}
+
+div.field h5 {
+	min-width: 30%;
+	align-self: center;
+	display: flex;
+	margin: 0px;
+}
+
+div.buttons {
+	margin: 1rem;
 }

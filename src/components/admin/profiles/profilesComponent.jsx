@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//import css from './profilesComponent.css';
 import styles from '../../../styles/styles.css';
 
 function ProfilesComponent({ profiles, handleEditProfile }) {

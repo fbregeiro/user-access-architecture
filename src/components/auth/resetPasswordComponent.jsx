@@ -8,18 +8,17 @@ import { resetPasswordValidate } from '../../utils/validation';
 
 // Styles and assets
 import styles from '../../styles/styles.css';
-import css from './resetPasswordComponent.css';
 
 class ResetPasswordComponent extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
-			<Form onSubmit={handleSubmit} className={css.form}>
+			<Form onSubmit={handleSubmit} className={styles.form}>
 				<h4>
 					Informe seu e-mail e te enviaremos um link seguro para que possa
 					reiniciar sua senha
 				</h4>
-				<div className={css.field}>
+				<div className={styles.field}>
 					<h5>E-Mail:</h5>
 					<Field
 						type="text"
@@ -29,7 +28,7 @@ class ResetPasswordComponent extends Component {
 						className={styles.basicinput}
 					/>
 				</div>
-				<div className={css.field}>
+				<div className={styles.buttons}>
 					<button
 						type="submit"
 						disabled={pristine || submitting}

@@ -9,7 +9,6 @@ import { createProfileValidate } from '../../../utils/validation';
 
 // Styles and assets
 import styles from '../../../styles/styles.css';
-import css from './newProfileComponent.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -26,31 +25,32 @@ function NewProfileComponent({
 	submitting
 }) {
 	return (
-		<Form onSubmit={handleSubmit} className={css.form}>
+		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Criar novo perfil</h4>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Nome:</h5>
 				<Field
 					type="text"
 					component="input"
 					placeholder="Nome"
 					name="description"
-					className={css.input}
+					className={styles.input}
 				/>
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Status:</h5>
 				<Field name="isActive" id="isActive" component={renderToggleInput} />
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Pode criar:</h5>
 				<Field name="canCreate" id="canCreate" component={renderToggleInput} />
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Pode editar:</h5>
 				<Field name="canEdit" id="canEdit" component={renderToggleInput} />
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
+				<h5>Sitemaps:</h5>
 				<Field name="sitemapIds" component="select" multiple={true}>
 					<option value="" />
 					{sitemapOptions.map(sitemapOption => (
@@ -60,11 +60,11 @@ function NewProfileComponent({
 					))}
 				</Field>
 			</div>
-			<div className={css.field}>
+			<div className={styles.buttons}>
 				<button
 					type="submit"
 					disabled={pristine || submitting}
-					className={styles.primaryButton}>
+					className={styles.basicbutton}>
 					<span key={1} className={styles.primaryButtonLabel}>
 						Salvar
 					</span>

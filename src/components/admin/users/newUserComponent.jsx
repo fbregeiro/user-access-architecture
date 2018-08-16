@@ -8,13 +8,12 @@ import { createUserByInvitationValidate } from '../../../utils/validation';
 
 // Styles and assets
 import styles from '../../../styles/styles.css';
-import css from './newUserComponent.css';
 
 function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 	return (
-		<Form onSubmit={handleSubmit} className={css.form}>
+		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Convidar novo Usuário</h4>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Nome Completo:</h5>
 				<Field
 					type="text"
@@ -24,7 +23,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 					className={styles.basicinput}
 				/>
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>E-Mail:</h5>
 				<Field
 					type="text"
@@ -34,7 +33,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 					className={styles.basicinput}
 				/>
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Perfil:</h5>
 				<Field name="profileId" component="select">
 					<option value="" />
@@ -45,7 +44,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 					))}
 				</Field>
 			</div>
-			<div className={css.field}>
+			<div className={styles.buttons}>
 				<button
 					type="submit"
 					disabled={pristine || submitting}

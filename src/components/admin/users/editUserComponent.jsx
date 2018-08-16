@@ -10,7 +10,6 @@ import { updateUserValidate } from '../../../utils/validation';
 
 // Styles and assets
 import styles from '../../../styles/styles.css';
-import css from './editUserComponent.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -28,10 +27,10 @@ function EditUserComponent({
 	submitting
 }) {
 	return (
-		<Form onSubmit={handleSubmit} className={css.form}>
+		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Editar Usuário</h4>
 			<h5>{user.fullName}</h5>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Perfil:</h5>
 				<Field name="profileId" component="select">
 					<option value="" />
@@ -42,11 +41,11 @@ function EditUserComponent({
 					))}
 				</Field>
 			</div>
-			<div className={css.field}>
+			<div className={styles.field}>
 				<h5>Status:</h5>
 				<Field name="isActive" id="isActive" component={renderToggleInput} />
 			</div>
-			<div className={css.field}>
+			<div className={styles.buttons}>
 				<button
 					type="submit"
 					disabled={pristine || submitting}
