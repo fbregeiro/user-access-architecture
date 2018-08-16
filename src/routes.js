@@ -16,14 +16,48 @@ import usersContainer from './containers/admin/users/usersContainer';
 import newUserContainer from './containers/admin/users/newUserContainer';
 import profilesContainer from './containers/admin/profiles/profilesContainer';
 
-function PrivateRoute({ component: Component, ...rest }) {
+const canRenderComponent = (
+	token,
+	userAccess,
+	propsLocation,
+	needsAuthorization
+) => {
+	var isAuthorized = false;
+	if (token !== null) {
+		if (needsAuthorization) {
+			if (userAccess !== null) {
+				userAccess.map(section => {
+					if (section.sectionMenus !== null) {
+						section.sectionMenus.map(sectionMenu => {
+							if (sectionMenu.route === propsLocation.pathname) {
+								isAuthorized = true;
+							}
+							if (sectionMenu.subMenus !== null) {
+								sectionMenu.subMenus.map(subMenu => {
+									if (subMenu.route === propsLocation.pathname) {
+										isAuthorized = true;
+									}
+								});
+							}
+						});
+					}
+				});
+			}
+		} else {
+			isAuthorized = true;
+		}
+	}
+	return isAuthorized;
+};
+
+function PrivateRoute({ component: Component, authorize, ...rest }) {
 	return (
 		<UserContext.Consumer>
-			{({ token }) => (
+			{({ token, userAccess }) => (
 				<Route
 					{...rest}
 					render={props =>
-						token !== null ? (
+						canRenderComponent(token, userAccess, props.location, authorize) ? (
 							<Component {...props} />
 						) : (
 							<Redirect
@@ -53,11 +87,27 @@ export default (
 				path="/password-activation"
 				component={passwordActivationContainer}
 			/>
-			<PrivateRoute path="/dashboard" component={dashboardContainer} />
-			<PrivateRoute path="/my-profile" component={myProfileContainer} />
-			<PrivateRoute path="/users" component={usersContainer} />
-			<PrivateRoute path="/new-user" component={newUserContainer} />
-			<PrivateRoute path="/profiles" component={profilesContainer} />
+			<PrivateRoute
+				path="/my-profile"
+				component={myProfileContainer}
+				authorize={false}
+			/>
+			<PrivateRoute
+				path="/dashboard"
+				component={dashboardContainer}
+				authorize={false}
+			/>
+			<PrivateRoute path="/users" component={usersContainer} authorize={true} />
+			<PrivateRoute
+				path="/new-user"
+				component={newUserContainer}
+				authorize={true}
+			/>
+			<PrivateRoute
+				path="/profiles"
+				component={profilesContainer}
+				authorize={true}
+			/>
 		</Switch>
 	</div>
 );
