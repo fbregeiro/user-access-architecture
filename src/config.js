@@ -1,9 +1,9 @@
 export default {
 	app: {
-		baseUri: 'http://localhost:3000'
+		baseUri: process.env.APP_URL || 'http://localhost:3000'
 	},
 	api: {
 		tokenKey: 'authentication-user-token',
-		baseUri: 'http://localhost:3001/api/'
+		baseUri: process.env.API_URL || 'http://localhost:3001'
 	}
 };

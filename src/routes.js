@@ -17,13 +17,13 @@ import newUserContainer from './containers/admin/users/newUserContainer';
 import profilesContainer from './containers/admin/profiles/profilesContainer';
 
 const canRenderComponent = (
-	token,
+	user,
 	userAccess,
 	propsLocation,
 	needsAuthorization
 ) => {
 	var isAuthorized = false;
-	if (token !== null) {
+	if (user !== null) {
 		if (needsAuthorization) {
 			if (userAccess !== null) {
 				userAccess.map(section => {
@@ -53,11 +53,11 @@ const canRenderComponent = (
 function PrivateRoute({ component: Component, authorize, ...rest }) {
 	return (
 		<UserContext.Consumer>
-			{({ token, userAccess }) => (
+			{({ user, userAccess }) => (
 				<Route
 					{...rest}
 					render={props =>
-						canRenderComponent(token, userAccess, props.location, authorize) ? (
+						canRenderComponent(user, userAccess, props.location, authorize) ? (
 							<Component {...props} />
 						) : (
 							<Redirect

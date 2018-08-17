@@ -1,5 +1,7 @@
-import factoryApi from './factoryApi';
+import { ApiFactory } from './factoryApi';
 import camelcaseKeysDeep from 'camelcase-keys-deep';
+
+const instance = ApiFactory();
 
 export const login = async (email, password) => {
 	const iLoginRequest = {
@@ -7,8 +9,8 @@ export const login = async (email, password) => {
 		password: password
 	};
 
-	const response = await factoryApi().post(
-		'authentication/login',
+	const response = await instance.post(
+		'/api/authentication/login',
 		iLoginRequest
 	);
 	return camelcaseKeysDeep(response);
@@ -16,9 +18,15 @@ export const login = async (email, password) => {
 
 export const resetPassword = async email => {
 	const iPasswordResetRequest = { email: email };
-	factoryApi().post('authentication/reset-password', iPasswordResetRequest);
+	await instance.post(
+		'/api/authentication/reset-password',
+		iPasswordResetRequest
+	);
 };
 
 export const changePassword = async iChangePasswordRequest => {
-	factoryApi().put('authentication/new-password', iChangePasswordRequest);
+	await instance.put(
+		'/api/authentication/new-password',
+		iChangePasswordRequest
+	);
 };

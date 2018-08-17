@@ -1,42 +1,32 @@
 import axios from 'axios';
-
-import { getData } from '../utils/persistency';
-import { AUTHENTICATION_DATA } from '../actions/authenticationActions';
 import config from '../config';
 
-const axiosClient = axios.create({
-	baseURL: config.api.baseUri
-});
+export const ApiFactory = () => {
+	const { api } = config;
 
-const errorHandler = error => {
-	if (
-		!error.response ||
-		!error.response.data ||
-		!error.response.data.errorMessage
-	) {
-		throw 'Erro inesperado';
-	} else {
-		throw error.response.data.errorMessage;
-	}
-};
-
-const post = (...args) => axiosClient.post(...args).catch(errorHandler);
-const get = (...args) => axiosClient.get(...args).catch(errorHandler);
-const put = (...args) => axiosClient.put(...args).catch(errorHandler);
-const _delete = (...args) => axiosClient.delete(...args).catch(errorHandler);
-
-export default () => {
-	const authenticationData = getData(AUTHENTICATION_DATA);
-
-	if (authenticationData && authenticationData.token) {
-		axiosClient.defaults.headers.common['Authorization'] =
-			authenticationData.token;
-	}
-
-	return {
-		post,
-		get,
-		put,
-		delete: _delete
+	const httpConfig = {
+		baseURL: api.baseUri
 	};
+
+	const instance = axios.create(httpConfig);
+
+	const token = localStorage.getItem(api.tokenKey);
+	if (token) {
+		instance.defaults.headers.common['token'] = token;
+	}
+
+	// TODO: Use this when using the real API
+	// instance.interceptors.request.use(
+	// 	config => {
+	// 		const token = localStorage.getItem(api.tokenKey);
+
+	// 		config.headers = {
+	// 			token: token || null
+	// 		};
+	// 		return config;
+	// 	},
+	// 	error => Promise.reject(error)
+	// );
+
+	return instance;
 };
