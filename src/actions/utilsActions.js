@@ -24,7 +24,7 @@ export const uploadFile = (file, name) => async dispatch => {
 
 		return dispatch({
 			type: UPLOAD_FILE,
-			payload: iFileUploadResponse
+			payload: iFileUploadResponse.data
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));

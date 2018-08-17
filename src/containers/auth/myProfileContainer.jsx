@@ -57,9 +57,9 @@ class MyProfileContainer extends Component {
 		this.props
 			.uploadFile(file, this.state.user.fullName)
 			.then(uploadFileResponse => {
-				if (uploadFileResponse && uploadFileResponse.payload.data.isSuccess) {
+				if (uploadFileResponse && uploadFileResponse.payload.isSuccess) {
 					const user = this.state.user;
-					user.photoUrl = uploadFileResponse.payload.data.fileUrl;
+					user.photoUrl = uploadFileResponse.payload.fileUrl;
 					this.setState({ user: user });
 				}
 			});
