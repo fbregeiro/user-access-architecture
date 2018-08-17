@@ -1,9 +1,9 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import expect from 'expect';
-import * as types from './actionTypes';
+import * as types from '../../actions/actionTypes';
 
-const utilsActions = require('./utilsActions');
+const utilsActions = require('../../actions/utilsActions');
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
@@ -23,8 +23,8 @@ describe('test - utilsActions/getSitemapOptions()', () => {
 			const profilesList = actions[1];
 			expect(profilesList).toBeDefined();
 			expect(profilesList.payload).toBeDefined();
-			expect(profilesList.payload.id).toEqual(1);
-			expect(profilesList.payload.title).toEqual('Administrador');
+			expect(profilesList.payload.length).toEqual(3);
+			expect(profilesList.payload[0].id).toEqual(1);
 		});
 	});
 });

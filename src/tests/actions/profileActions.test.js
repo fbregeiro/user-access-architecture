@@ -1,9 +1,9 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import expect from 'expect';
-import * as types from './actionTypes';
+import * as types from '../../actions/actionTypes';
 
-const profileActions = require('./profileActions');
+const profileActions = require('../../actions/profileActions');
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
