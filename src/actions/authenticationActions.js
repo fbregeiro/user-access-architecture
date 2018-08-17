@@ -1,6 +1,7 @@
 import { login, resetPassword, changePassword } from '../api/authenticationApi';
 import { ajaxFailure, beginAjaxCall } from './ajaxStatusAction';
-import { saveData, deleteData } from '../utils/persistency';
+import { saveData, deleteData, USER_DATA } from '../utils/persistency';
+import config from '../config';
 
 import {
 	AUTHENTICATION_LOGIN,
@@ -9,10 +10,6 @@ import {
 	AUTHENTICATION_CHANGE_PASSWORD
 } from '../actions/actionTypes';
 
-// import { SubmissionError } from 'redux-form'; // TODO: Check when to use SubmissionError instead of throw Error
-
-export const AUTHENTICATION_DATA = 'authentication_data';
-
 export const userLogin = ({ email, password }) => async dispatch => {
 	dispatch(beginAjaxCall());
 	try {
@@ -20,16 +17,19 @@ export const userLogin = ({ email, password }) => async dispatch => {
 
 		if (iLoginResponse && iLoginResponse.data) {
 			if (iLoginResponse.data.isSuccess) {
-				const authenticationData = {
+				// Save token
+				const { api } = config;
+				saveData(api.tokenKey, iLoginResponse.data.token);
+
+				// Save user data.
+				const userData = {
 					user: iLoginResponse.data.user,
-					token: iLoginResponse.data.token,
 					userAccess: iLoginResponse.data.userAccess
 				};
-
-				saveData(AUTHENTICATION_DATA, authenticationData);
+				saveData(USER_DATA, userData);
 
 				dispatch({
-					...authenticationData,
+					...userData,
 					type: AUTHENTICATION_LOGIN
 				});
 			} else {
@@ -41,14 +41,13 @@ export const userLogin = ({ email, password }) => async dispatch => {
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
 		throw error;
-		// throw new SubmissionError({
-		// 	_error: error
-		// });
 	}
 };
 
 export const userLogout = () => async dispatch => {
-	deleteData(AUTHENTICATION_DATA);
+	const { api } = config;
+	deleteData(api.tokenKey);
+	deleteData(USER_DATA);
 	dispatch({
 		type: AUTHENTICATION_LOGOUT
 	});

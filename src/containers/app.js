@@ -5,18 +5,16 @@ import { hot } from 'react-hot-loader';
 import { ConnectedRouter } from 'react-router-redux';
 
 import history from '../store/history';
-import Header from './common/headerContainer';
-
 import routes from '../routes';
 
+import { getData, USER_DATA } from '../utils/persistency';
+import { userLogin, userLogout } from '../actions/authenticationActions';
+import { UserContext } from '../context/userContext';
+
+import Header from './common/headerContainer';
 import MenuComponent from '../components/common/menuComponent';
 
 import css from './app.css';
-
-import { userLogin, userLogout } from '../actions/authenticationActions';
-
-import { getAuthenticationData } from '../utils/auth';
-import { UserContext } from '../context/userContext';
 
 class App extends React.Component {
 	constructor(props) {
@@ -34,21 +32,21 @@ class App extends React.Component {
 
 		this.performLogin = values => {
 			this.props.userLogin(values).then(() => {
-				const authenticationData = getAuthenticationData();
+				const userData = getData(USER_DATA);
+
 				this.setState(state => ({
 					...state,
-					user: authenticationData.user
+					user: userData.user
 				}));
 				history.push('/dashboard');
 			});
 		};
 
 		this.loadUserContext = () => {
-			const authenticationData = getAuthenticationData();
+			const userData = getData(USER_DATA);
 			this.state = {
-				user: authenticationData ? authenticationData.user : null,
-				userAccess: authenticationData ? authenticationData.userAccess : null,
-				token: authenticationData ? authenticationData.token : null,
+				user: userData ? userData.user : null,
+				userAccess: userData ? userData.userAccess : null,
 				performLogout: this.performLogout,
 				performLogin: this.performLogin
 			};
