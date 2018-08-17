@@ -8,7 +8,7 @@ import { uploadFile } from '../../actions/utilsActions';
 
 import MyProfileForm from '../../components/auth/myProfileComponent';
 
-import { getAuthenticationData } from '../../utils/auth';
+import { getData, USER_DATA } from '../../utils/persistency';
 
 class MyProfileContainer extends Component {
 	constructor(props) {
@@ -24,9 +24,9 @@ class MyProfileContainer extends Component {
 	}
 
 	loadUser = () => {
-		const authenticationData = getAuthenticationData();
+		const userData = getData(USER_DATA);
 		this.setState({
-			user: authenticationData ? authenticationData.user : null
+			user: userData ? userData.user : null
 		});
 	};
 

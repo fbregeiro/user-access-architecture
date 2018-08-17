@@ -1,3 +1,6 @@
+// Keys used to store data in local storage
+export const USER_DATA = 'user_data';
+
 export const saveData = (key, value) => {
 	try {
 		return localStorage.setItem(key, JSON.stringify(value));
