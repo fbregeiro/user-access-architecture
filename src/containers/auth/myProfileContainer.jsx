@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import history from '../../store/history';
 
 import { updateUser } from '../../actions/userActions';
-
 import { uploadFile } from '../../actions/utilsActions';
 
 import MyProfileForm from '../../components/auth/myProfileComponent';
-
-import { getData, USER_DATA } from '../../utils/persistency';
 
 class MyProfileContainer extends Component {
 	constructor(props) {
@@ -24,9 +21,9 @@ class MyProfileContainer extends Component {
 	}
 
 	loadUser = () => {
-		const userData = getData(USER_DATA);
 		this.setState({
-			user: userData ? userData.user : null
+			user: this.props.user,
+			newUserPhotoUrl: null
 		});
 	};
 
@@ -36,7 +33,9 @@ class MyProfileContainer extends Component {
 			fullName: user.fullName,
 			documentNumber: user.documentNumber,
 			email: user.email,
-			photoUrl: this.state.user.photoUrl,
+			photoUrl: this.state.newUserPhotoUrl
+				? this.state.newUserPhotoUrl
+				: this.state.user.photoUrl,
 			password: null
 		};
 
@@ -58,9 +57,13 @@ class MyProfileContainer extends Component {
 			.uploadFile(file, this.state.user.fullName)
 			.then(uploadFileResponse => {
 				if (uploadFileResponse && uploadFileResponse.payload.isSuccess) {
-					const user = this.state.user;
-					user.photoUrl = uploadFileResponse.payload.fileUrl;
-					this.setState({ user: user });
+					this.setState({
+						newUserPhotoUrl: uploadFileResponse.payload.fileUrl
+					});
+
+					// const user = this.props.user;
+					// user.photoUrl = uploadFileResponse.payload.fileUrl;
+					// this.setState({ user: user });
 				}
 			});
 	};
@@ -70,7 +73,8 @@ class MyProfileContainer extends Component {
 			<div>
 				{this.state.user && (
 					<MyProfileForm
-						user={this.state.user}
+						user={this.props.user}
+						newUserPhotoUrl={this.state.newUserPhotoUrl}
 						onSubmit={this.handleSaveMyProfile}
 						onUploadUserPhoto={this.handleUploadUserPhoto}
 					/>
@@ -80,9 +84,13 @@ class MyProfileContainer extends Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	user: state.auth.user
+});
+
 const mapActionToProps = {
 	updateUser,
 	uploadFile
 };
 
-export default connect(null, mapActionToProps)(MyProfileContainer);
+export default connect(mapStateToProps, mapActionToProps)(MyProfileContainer);

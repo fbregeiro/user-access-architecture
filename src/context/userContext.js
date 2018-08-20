@@ -2,6 +2,6 @@ import React from 'react';
 
 export const UserContext = React.createContext({
 	user: {},
-	performLogin: () => {},
-	performLogout: () => {}
+	userAccess: {},
+	token: null
 });

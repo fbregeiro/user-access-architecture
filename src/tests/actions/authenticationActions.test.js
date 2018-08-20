@@ -23,7 +23,7 @@ describe('test - authenticationActions/login()', () => {
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
 				expect(actions[1].type).toEqual(types.AUTHENTICATION_LOGIN);
 
-				const userData = actions[1];
+				const userData = actions[1].payload;
 				expect(userData.user).toBeDefined();
 				expect(userData.user.id).toEqual(1);
 			});
