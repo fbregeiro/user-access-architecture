@@ -60,10 +60,6 @@ class MyProfileContainer extends Component {
 					this.setState({
 						newUserPhotoUrl: uploadFileResponse.payload.fileUrl
 					});
-
-					// const user = this.props.user;
-					// user.photoUrl = uploadFileResponse.payload.fileUrl;
-					// this.setState({ user: user });
 				}
 			});
 	};
