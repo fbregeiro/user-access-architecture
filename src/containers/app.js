@@ -7,71 +7,28 @@ import { ConnectedRouter } from 'react-router-redux';
 import history from '../store/history';
 import routes from '../routes';
 
-import { getData, USER_DATA } from '../utils/persistency';
-import { userLogin, userLogout } from '../actions/authenticationActions';
 import { UserContext } from '../context/userContext';
 
 import Header from './common/headerContainer';
-import MenuComponent from '../components/common/menuComponent';
+import MenuContainer from './common/menuContainer';
 
 import css from './app.css';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.performLogout = () => {
-			this.props.userLogout().then(() => {
-				this.setState(state => ({
-					...state,
-					user: {}
-				}));
-				history.push('/');
-			});
-		};
-
-		this.performLogin = values => {
-			this.props.userLogin(values).then(() => {
-				const userData = getData(USER_DATA);
-
-				this.setState(state => ({
-					...state,
-					user: userData.user
-				}));
-				history.push('/dashboard');
-			});
-		};
-
-		this.loadUserContext = () => {
-			const userData = getData(USER_DATA);
-			this.state = {
-				user: userData ? userData.user : null,
-				userAccess: userData ? userData.userAccess : null,
-				performLogout: this.performLogout,
-				performLogin: this.performLogin
-			};
-		};
-	}
-
-	componentDidCatch() {
-		//DO SOMETHING ( error ) = PARAM
 	}
 
 	render() {
-		this.loadUserContext();
 		return (
-			<UserContext.Provider value={this.state}>
+			<UserContext.Provider value={this.props.userData}>
 				<div>
 					<ConnectedRouter history={history}>
 						<div>
 							{Header({
 								isFetching: this.props.isFetching
 							})}
-							{this.state.user && (
-								<div className={css.sidebar}>
-									<MenuComponent />
-								</div>
-							)}
+							{this.props.userData.user && <MenuContainer />}
 							<div className={css.mainContent}>{routes}</div>
 						</div>
 					</ConnectedRouter>
@@ -87,12 +44,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	isFetching: state.ajax.inProgress > 0
+	isFetching: state.ajax.inProgress > 0,
+	userData: state.auth
 });
 
-const mapActionToProps = {
-	userLogin,
-	userLogout
-};
+const mapActionToProps = {};
 
 export default hot(module)(connect(mapStateToProps, mapActionToProps)(App));

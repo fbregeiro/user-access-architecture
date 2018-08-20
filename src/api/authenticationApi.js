@@ -8,7 +8,6 @@ export const login = async (email, password) => {
 		email: email,
 		password: password
 	};
-
 	const response = await instance.post(
 		'/api/authentication/login',
 		iLoginRequest

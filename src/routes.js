@@ -23,7 +23,7 @@ const canRenderComponent = (
 	needsAuthorization
 ) => {
 	var isAuthorized = false;
-	if (user !== null) {
+	if (user !== null && user.id !== null) {
 		if (needsAuthorization) {
 			if (userAccess !== null) {
 				userAccess.map(section => {
