@@ -1,6 +1,6 @@
 import { login, resetPassword, changePassword } from '../api/authenticationApi';
 import { ajaxFailure, beginAjaxCall } from './ajaxStatusAction';
-import { saveData, deleteData, USER_DATA } from '../utils/persistency';
+import { saveData, deleteData } from '../utils/persistency';
 import config from '../config';
 
 import {
@@ -17,19 +17,19 @@ export const userLogin = ({ email, password }) => async dispatch => {
 
 		if (iLoginResponse && iLoginResponse.data) {
 			if (iLoginResponse.data.isSuccess) {
-				// Save token
+				// Save token into local storage
 				const { api } = config;
 				saveData(api.tokenKey, iLoginResponse.data.token);
 
 				// Save user data.
 				const userData = {
+					token: iLoginResponse.data.token,
 					user: iLoginResponse.data.user,
 					userAccess: iLoginResponse.data.userAccess
 				};
-				saveData(USER_DATA, userData);
 
 				dispatch({
-					...userData,
+					payload: userData,
 					type: AUTHENTICATION_LOGIN
 				});
 			} else {
@@ -47,8 +47,14 @@ export const userLogin = ({ email, password }) => async dispatch => {
 export const userLogout = () => async dispatch => {
 	const { api } = config;
 	deleteData(api.tokenKey);
-	deleteData(USER_DATA);
+
+	const userData = {
+		token: null,
+		user: null,
+		userAccess: null
+	};
 	dispatch({
+		payload: userData,
 		type: AUTHENTICATION_LOGOUT
 	});
 };

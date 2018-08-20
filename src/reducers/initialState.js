@@ -3,6 +3,11 @@ export default {
 		inProgress: 0,
 		error: {}
 	},
+	auth: {
+		token: null,
+		user: null,
+		userAccess: null
+	},
 	admin: {
 		users: [],
 		profiles: [],

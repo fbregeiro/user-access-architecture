@@ -40,11 +40,14 @@ class MyProfileComponent extends Component {
 	}
 
 	render() {
-		const { user, handleSubmit, submitting } = this.props;
+		const { user, newUserPhotoUrl, handleSubmit, submitting } = this.props;
 		return (
 			<Form onSubmit={handleSubmit} className={styles.form}>
 				<h4>Meu Perfil</h4>
-				<img src={user.photoUrl} className={css.userImage} />
+				<img
+					src={newUserPhotoUrl ? newUserPhotoUrl : user.photoUrl}
+					className={css.userImage}
+				/>
 				<h4>Perfil: {user.profile.description}</h4>
 				<div className={styles.field}>
 					<h5>Trocar foto:</h5>
