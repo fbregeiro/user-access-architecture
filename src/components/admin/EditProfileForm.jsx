@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 import Toggle from 'react-toggle';
 
-// Validation
-import { updateProfileValidate } from '../../../utils/validation';
+import customFields from '../common/customFields';
+import { updateProfileValidate } from '../../utils/validation';
 
-// Styles and assets
-import styles from '../../../styles/styles.css';
+import styles from '../../styles/styles.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -19,23 +18,16 @@ export const renderToggleInput = field => (
 	/>
 );
 
-function EditProfileComponent({
-	sitemapOptions,
-	handleSubmit,
-	pristine,
-	submitting
-}) {
+function EditProfile({ sitemapOptions, handleSubmit, pristine, submitting }) {
 	return (
 		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Editar Perfil</h4>
 			<div className={styles.field}>
-				<h5>Nome:</h5>
 				<Field
-					type="text"
-					component="input"
-					placeholder="Nome"
+					id={1}
+					label="Descrição"
 					name="description"
-					className={styles.input}
+					component={customFields.Input}
 				/>
 			</div>
 			<div className={styles.field}>
@@ -75,7 +67,7 @@ function EditProfileComponent({
 	);
 }
 
-EditProfileComponent.propTypes = {
+EditProfile.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -86,7 +78,7 @@ const EditProfileForm = reduxForm({
 	asyncBlurFields: [],
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(EditProfileComponent);
+})(EditProfile);
 
 const mapStateToProps = (state, ownProps) => ({
 	initialValues: {

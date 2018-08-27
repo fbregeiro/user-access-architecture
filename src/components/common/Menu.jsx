@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import css from './menuComponent.css';
+import css from './Menu.css';
 
-export default function MenuComponent(props) {
+export default function Menu(props) {
 	const { user, userAccess, onUserLogout } = props;
 	return (
 		<ol className={css['tree-list']}>

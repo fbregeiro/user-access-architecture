@@ -9,8 +9,8 @@ import routes from '../routes';
 
 import { UserContext } from '../context/userContext';
 
-import Header from './common/headerContainer';
-import MenuContainer from './common/menuContainer';
+import HeaderContainer from './common/Header';
+import MenuContainer from './common/Menu';
 
 import css from './app.css';
 
@@ -25,7 +25,7 @@ class App extends React.Component {
 				<div>
 					<ConnectedRouter history={history}>
 						<div>
-							{Header({
+							{HeaderContainer({
 								isFetching: this.props.isFetching
 							})}
 							{this.props.userData.user && <MenuContainer />}

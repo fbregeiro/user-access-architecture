@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import UsersComponent from '../../../components/admin/users/usersComponent';
-import NewUserForm from '../../../components/admin/users/newUserComponent';
-import EditUserForm from '../../../components/admin/users/editUserComponent';
+import UsersList from '../../components/admin/UsersList';
+import NewUserForm from '../../components/admin/NewUserForm';
+import EditUserForm from '../../components/admin/EditUserForm';
 
 import {
 	getUsersByStatus,
 	createUserByInvitation,
 	updateUser
-} from '../../../actions/userActions';
+} from '../../actions/userActions';
 
-import { getProfilesByStatus } from '../../../actions/profileActions';
+import { getProfilesByStatus } from '../../actions/profileActions';
 
-import css from './usersContainer.css';
-import styles from '../../../styles/styles.css';
+import css from './Users.css';
+import styles from '../../styles/styles.css';
 
-class UsersContainer extends Component {
+class Users extends Component {
 	constructor(props) {
 		super(props);
 		this.handleEditUser = this.handleEditUser.bind(this);
@@ -100,7 +100,7 @@ class UsersContainer extends Component {
 						</button>
 					</div>
 				</div>
-				<UsersComponent
+				<UsersList
 					users={this.state.usersFilteredList || []}
 					handleEditUser={this.handleEditUser}
 				/>
@@ -148,4 +148,4 @@ const mapActionToProps = {
 	getProfilesByStatus
 };
 
-export default connect(mapStateToProps, mapActionToProps)(UsersContainer);
+export default connect(mapStateToProps, mapActionToProps)(Users);

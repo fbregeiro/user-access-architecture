@@ -3,34 +3,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
-// Validation
-import { createUserByInvitationValidate } from '../../../utils/validation';
+import customFields from '../common/customFields';
+import { createUserByInvitationValidate } from '../../utils/validation';
 
-// Styles and assets
-import styles from '../../../styles/styles.css';
+import styles from '../../styles/styles.css';
 
-function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
+function NewUser({ profiles, handleSubmit, pristine, submitting }) {
 	return (
 		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Convidar novo Usuário</h4>
 			<div className={styles.field}>
-				<h5>Nome Completo:</h5>
 				<Field
-					type="text"
-					component="input"
-					placeholder="Nome Completo"
+					id={1}
+					label="Nome Completo"
 					name="fullName"
-					className={styles.basicinput}
+					component={customFields.Input}
 				/>
 			</div>
 			<div className={styles.field}>
-				<h5>E-Mail:</h5>
 				<Field
-					type="text"
-					component="input"
-					placeholder="E-mail"
+					id={2}
+					label="E-mail"
 					name="email"
-					className={styles.basicinput}
+					autoComplete="email"
+					component={customFields.Input}
 				/>
 			</div>
 			<div className={styles.field}>
@@ -56,7 +52,7 @@ function NewUserComponent({ profiles, handleSubmit, pristine, submitting }) {
 	);
 }
 
-NewUserComponent.propTypes = {
+NewUser.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -66,6 +62,6 @@ const NewUserForm = reduxForm({
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(NewUserComponent);
+})(NewUser);
 
 export default NewUserForm;

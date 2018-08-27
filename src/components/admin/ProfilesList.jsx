@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from '../../../styles/styles.css';
+import styles from '../../styles/styles.css';
 
-function ProfilesComponent({ profiles, handleEditProfile }) {
+function ProfilesList({ profiles, handleEditProfile }) {
 	return (
 		<table id="t" className={styles.basictable}>
 			<thead>
@@ -38,8 +38,8 @@ function ProfilesComponent({ profiles, handleEditProfile }) {
 	);
 }
 
-ProfilesComponent.proptTypes = {
+ProfilesList.proptTypes = {
 	users: PropTypes.array.isRequired
 };
 
-export default ProfilesComponent;
+export default ProfilesList;

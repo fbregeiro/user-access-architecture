@@ -1,6 +1,9 @@
 import * as api from '../api/utilsApi';
 import { ajaxFailure, beginAjaxCall } from './ajaxStatusAction';
-import { GET_SITEMAP_OPTIONS, UPLOAD_FILE } from '../actions/actionTypes';
+import {
+	GET_SITEMAP_OPTIONS_SUCCESS,
+	UPLOAD_FILE_SUCCESS
+} from '../actions/actionTypes';
 
 export const getSitemapsOptions = () => async dispatch => {
 	dispatch(beginAjaxCall());
@@ -8,7 +11,7 @@ export const getSitemapsOptions = () => async dispatch => {
 		const iSitemaps = await api.getSitemapOptions();
 
 		dispatch({
-			type: GET_SITEMAP_OPTIONS,
+			type: GET_SITEMAP_OPTIONS_SUCCESS,
 			payload: iSitemaps.data
 		});
 	} catch (error) {
@@ -23,7 +26,7 @@ export const uploadFile = (file, name) => async dispatch => {
 		const iFileUploadResponse = await api.uploadFile(file, name);
 
 		return dispatch({
-			type: UPLOAD_FILE,
+			type: UPLOAD_FILE_SUCCESS,
 			payload: iFileUploadResponse.data
 		});
 	} catch (error) {

@@ -4,6 +4,7 @@ export default {
 		error: {}
 	},
 	auth: {
+		isAuthenticated: false,
 		token: null,
 		user: null,
 		userAccess: null

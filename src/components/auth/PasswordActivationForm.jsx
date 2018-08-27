@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
-// Validation
+import customFields from '../common/customFields';
 import { passwordActivationValidate } from '../../utils/validation';
 
-// Styles and assets
 import styles from '../../styles/styles.css';
 
-class PasswordActivationComponent extends Component {
+class PasswordActivation extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
@@ -19,33 +18,31 @@ class PasswordActivationComponent extends Component {
 					senha
 				</h4>
 				<div className={styles.field}>
-					<h5>Código:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="Código"
+						id={1}
+						label="Código"
 						name="token"
-						className={styles.basicinput}
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>Senha:</h5>
 					<Field
-						type="password"
-						component="input"
-						placeholder="Senha"
+						id={2}
+						label="Senha"
 						name="password"
-						className={styles.basicinput}
+						type="password"
+						autoComplete="password"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>Confirmação de Senha:</h5>
 					<Field
-						type="password"
-						component="input"
-						placeholder="Confirmação de Senha"
+						id={3}
+						label="Confirmação de Senha"
 						name="passwordConfirmation"
-						className={styles.basicinput}
+						type="password"
+						autoComplete="password"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.buttons}>
@@ -61,7 +58,7 @@ class PasswordActivationComponent extends Component {
 	}
 }
 
-PasswordActivationComponent.propTypes = {
+PasswordActivation.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -71,6 +68,6 @@ const PasswordActivationForm = reduxForm({
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(PasswordActivationComponent);
+})(PasswordActivation);
 
 export default PasswordActivationForm;

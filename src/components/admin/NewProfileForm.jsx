@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 import Toggle from 'react-toggle';
 
-// Validation
-import { createProfileValidate } from '../../../utils/validation';
+import customFields from '../common/customFields';
+import { createProfileValidate } from '../../utils/validation';
 
-// Styles and assets
-import styles from '../../../styles/styles.css';
+import styles from '../../styles/styles.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -18,23 +17,16 @@ export const renderToggleInput = field => (
 	/>
 );
 
-function NewProfileComponent({
-	sitemapOptions,
-	handleSubmit,
-	pristine,
-	submitting
-}) {
+function NewProfile({ sitemapOptions, handleSubmit, pristine, submitting }) {
 	return (
 		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Criar novo perfil</h4>
 			<div className={styles.field}>
-				<h5>Nome:</h5>
 				<Field
-					type="text"
-					component="input"
-					placeholder="Nome"
+					id={1}
+					label="Descrição"
 					name="description"
-					className={styles.input}
+					component={customFields.Input}
 				/>
 			</div>
 			<div className={styles.field}>
@@ -74,7 +66,7 @@ function NewProfileComponent({
 	);
 }
 
-NewProfileComponent.propTypes = {
+NewProfile.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -85,6 +77,6 @@ const NewProfileForm = reduxForm({
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(NewProfileComponent);
+})(NewProfile);
 
 export default NewProfileForm;

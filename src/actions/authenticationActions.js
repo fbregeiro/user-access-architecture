@@ -4,10 +4,10 @@ import { saveData, deleteData } from '../utils/persistency';
 import config from '../config';
 
 import {
-	AUTHENTICATION_LOGIN,
-	AUTHENTICATION_LOGOUT,
-	AUTHENTICATION_RESET_PASSWORD,
-	AUTHENTICATION_CHANGE_PASSWORD
+	AUTHENTICATION_LOGIN_SUCCESS,
+	AUTHENTICATION_LOGOUT_SUCCESS,
+	AUTHENTICATION_RESET_PASSWORD_SUCCESS,
+	AUTHENTICATION_CHANGE_PASSWORD_SUCCESS
 } from '../actions/actionTypes';
 
 export const userLogin = ({ email, password }) => async dispatch => {
@@ -23,6 +23,7 @@ export const userLogin = ({ email, password }) => async dispatch => {
 
 				// Save user data.
 				const userData = {
+					isAuthenticated: true,
 					token: iLoginResponse.data.token,
 					user: iLoginResponse.data.user,
 					userAccess: iLoginResponse.data.userAccess
@@ -30,7 +31,7 @@ export const userLogin = ({ email, password }) => async dispatch => {
 
 				dispatch({
 					payload: userData,
-					type: AUTHENTICATION_LOGIN
+					type: AUTHENTICATION_LOGIN_SUCCESS
 				});
 			} else {
 				throw iLoginResponse.operationMessage;
@@ -49,13 +50,14 @@ export const userLogout = () => async dispatch => {
 	deleteData(api.tokenKey);
 
 	const userData = {
+		isAuthenticated: false,
 		token: null,
 		user: null,
 		userAccess: null
 	};
 	dispatch({
 		payload: userData,
-		type: AUTHENTICATION_LOGOUT
+		type: AUTHENTICATION_LOGOUT_SUCCESS
 	});
 };
 
@@ -64,7 +66,7 @@ export const resetUserPassword = email => async dispatch => {
 	try {
 		await resetPassword(email);
 		dispatch({
-			type: AUTHENTICATION_RESET_PASSWORD
+			type: AUTHENTICATION_RESET_PASSWORD_SUCCESS
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));
@@ -77,7 +79,7 @@ export const changeUserPassword = iChangePasswordRequest => async dispatch => {
 	try {
 		await changePassword(iChangePasswordRequest);
 		dispatch({
-			type: AUTHENTICATION_CHANGE_PASSWORD
+			type: AUTHENTICATION_CHANGE_PASSWORD_SUCCESS
 		});
 	} catch (error) {
 		dispatch(ajaxFailure(error.response));

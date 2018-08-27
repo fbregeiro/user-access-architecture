@@ -6,10 +6,10 @@ import { reduxForm, Form, Field } from 'redux-form';
 import Toggle from 'react-toggle';
 
 // Validation
-import { updateUserValidate } from '../../../utils/validation';
+import { updateUserValidate } from '../../utils/validation';
 
 // Styles and assets
-import styles from '../../../styles/styles.css';
+import styles from '../../styles/styles.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -19,13 +19,7 @@ export const renderToggleInput = field => (
 	/>
 );
 
-function EditUserComponent({
-	user,
-	profiles,
-	handleSubmit,
-	pristine,
-	submitting
-}) {
+function EditUser({ user, profiles, handleSubmit, pristine, submitting }) {
 	return (
 		<Form onSubmit={handleSubmit} className={styles.form}>
 			<h4>Editar Usuário</h4>
@@ -57,7 +51,7 @@ function EditUserComponent({
 	);
 }
 
-EditUserComponent.propTypes = {
+EditUser.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -68,7 +62,7 @@ const EditUserForm = reduxForm({
 	asyncBlurFields: [],
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(EditUserComponent);
+})(EditUser);
 
 const mapStateToProps = (state, ownProps) => ({
 	initialValues: {

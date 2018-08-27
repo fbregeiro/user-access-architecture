@@ -7,12 +7,12 @@ import history from '../../store/history';
 import { createUserByInvitation } from '../../actions/userActions';
 
 // Components
-import AccountActivationForm from '../../components/auth/accountActivationComponent';
+import AccountActivationForm from '../../components/auth/AccountActivationForm';
 
 // Styles and assets
-import css from './accountActivationContainer.css';
+import css from './AccountActivation.css';
 
-class AccountActivationContainer extends Component {
+class AccountActivation extends Component {
 	handleCreateUserByInvitation = values => {
 		const { accessCode, email, password } = values;
 		this.props
@@ -41,4 +41,4 @@ const mapActionToProps = {
 	createUserByInvitation
 };
 
-export default connect(null, mapActionToProps)(AccountActivationContainer);
+export default connect(null, mapActionToProps)(AccountActivation);

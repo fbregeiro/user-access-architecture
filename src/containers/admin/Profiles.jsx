@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ProfilesComponent from '../../../components/admin/profiles/profilesComponent';
-import NewProfileForm from '../../../components/admin/profiles/newProfileComponent';
-import EditProfileForm from '../../../components/admin/profiles/editProfileComponent';
+import ProfilesList from '../../components/admin/ProfilesList';
+import NewProfileForm from '../../components/admin/NewProfileForm';
+import EditProfileForm from '../../components/admin/EditProfileForm';
 
 import {
 	getProfilesByStatus,
 	createProfile,
 	updateProfile
-} from '../../../actions/profileActions';
+} from '../../actions/profileActions';
 
-import { getSitemapsOptions } from '../../../actions/utilsActions';
+import { getSitemapsOptions } from '../../actions/utilsActions';
 
-import css from './profilesContainer.css';
-import styles from '../../../styles/styles.css';
+import css from './Profiles.css';
+import styles from '../../styles/styles.css';
 
-class ProfilesContainer extends Component {
+class Profiles extends Component {
 	constructor(props) {
 		super(props);
 		this.handleEditProfile = this.handleEditProfile.bind(this);
@@ -100,7 +100,7 @@ class ProfilesContainer extends Component {
 						/>
 					</div>
 				</div>
-				<ProfilesComponent
+				<ProfilesList
 					profiles={this.state.profilesFilteredList || []}
 					handleEditProfile={this.handleEditProfile}
 				/>
@@ -148,4 +148,4 @@ const mapActionToProps = {
 	updateProfile
 };
 
-export default connect(mapStateToProps, mapActionToProps)(ProfilesContainer);
+export default connect(mapStateToProps, mapActionToProps)(Profiles);

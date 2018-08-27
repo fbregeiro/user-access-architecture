@@ -3,7 +3,7 @@ import messages from './messages.json';
 const validEmail = email =>
 	!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
-export const loginValidate = values => {
+export const signinValidate = values => {
 	const { email, password } = messages;
 	const errors = {};
 

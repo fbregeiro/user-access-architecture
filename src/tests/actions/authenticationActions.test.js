@@ -21,7 +21,7 @@ describe('test - authenticationActions/login()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + AUTHENTICATION_LOGIN.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.AUTHENTICATION_LOGIN);
+				expect(actions[1].type).toEqual(types.AUTHENTICATION_LOGIN_SUCCESS);
 
 				const userData = actions[1].payload;
 				expect(userData.user).toBeDefined();
@@ -42,7 +42,9 @@ describe('test - authenticationActions/resetPassword()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + AUTHENTICATION_RESET_PASSWORD.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.AUTHENTICATION_RESET_PASSWORD);
+				expect(actions[1].type).toEqual(
+					types.AUTHENTICATION_RESET_PASSWORD_SUCCESS
+				);
 			});
 	});
 });
@@ -66,7 +68,9 @@ describe('test - authenticationActions/changePassword()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + AUTHENTICATION_CHANGE_PASSWORD.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.AUTHENTICATION_CHANGE_PASSWORD);
+				expect(actions[1].type).toEqual(
+					types.AUTHENTICATION_CHANGE_PASSWORD_SUCCESS
+				);
 			});
 	});
 });

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import assign from 'domkit/appendVendorPrefix';
 import insertKeyframesRule from 'domkit/insertKeyframesRule';
 
+import './Loader.css';
+
 const rotateKeyframes = {
 	'100%': {
 		transform: 'rotate(360deg)'
@@ -22,7 +24,7 @@ const rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 
 const bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
-class LoaderComponent extends Component {
+class Loader extends Component {
 	getBallStyle(size) {
 		return {
 			backgroundColor: this.props.color,
@@ -71,7 +73,7 @@ class LoaderComponent extends Component {
 	renderLoader(loading) {
 		if (loading) {
 			return (
-				<div id={this.props.id} className={this.props.className}>
+				<div id={this.props.id} className="loading">
 					<div style={this.getStyle(0)}>
 						<div style={this.getStyle(1)} />
 						<div style={this.getStyle(2)} />
@@ -88,11 +90,11 @@ class LoaderComponent extends Component {
 	}
 }
 
-LoaderComponent.propTypes = {
+Loader.propTypes = {
 	loading: PropTypes.bool,
 	color: PropTypes.string,
 	size: PropTypes.number,
 	margin: PropTypes.string
 };
 
-export default LoaderComponent;
+export default Loader;

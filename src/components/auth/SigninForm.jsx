@@ -3,29 +3,34 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
-// Validation
-import { resetPasswordValidate } from '../../utils/validation';
+import customFields from '../common/customFields';
+import { signinValidate } from '../../utils/validation';
 
-// Styles and assets
 import styles from '../../styles/styles.css';
 
-class ResetPasswordComponent extends Component {
+class Signin extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
 			<Form onSubmit={handleSubmit} className={styles.form}>
-				<h4>
-					Informe seu e-mail e te enviaremos um link seguro para que possa
-					reiniciar sua senha
-				</h4>
+				<h4>Informe suas credencias para acessar a plataforma</h4>
 				<div className={styles.field}>
-					<h5>E-Mail:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="E-mail"
+						id={1}
+						label="E-mail"
 						name="email"
-						className={styles.basicinput}
+						autoComplete="email"
+						component={customFields.Input}
+					/>
+				</div>
+				<div className={styles.field}>
+					<Field
+						id={2}
+						label="Senha"
+						name="password"
+						type="password"
+						autoComplete="password"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.buttons}>
@@ -33,7 +38,7 @@ class ResetPasswordComponent extends Component {
 						type="submit"
 						disabled={pristine || submitting}
 						className={styles.basicbutton}>
-						Solicitar reinicialização de senha
+						Login
 					</button>
 				</div>
 			</Form>
@@ -41,16 +46,16 @@ class ResetPasswordComponent extends Component {
 	}
 }
 
-ResetPasswordComponent.propTypes = {
+Signin.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
-const ResetPasswordForm = reduxForm({
-	form: 'resetPasswordForm',
-	validate: resetPasswordValidate,
+const SigninForm = reduxForm({
+	form: 'signin-form',
+	validate: signinValidate,
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(ResetPasswordComponent);
+})(Signin);
 
-export default ResetPasswordForm;
+export default SigninForm;

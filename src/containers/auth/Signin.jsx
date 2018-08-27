@@ -2,27 +2,26 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import history from '../../store/history';
 
-// Components
-import LoginForm from '../../components/auth/loginComponent';
-
+import SigninForm from '../../components/auth/SigninForm';
 import { userLogin } from '../../actions/authenticationActions';
 
-// Styles and assets
-import css from './loginContainer.css';
+import css from './Signin.css';
 
-class LoginContainer extends Component {
-	handleUserLogin = values => {
-		this.props.userLogin(values).then(() => {
+class Signin extends Component {
+	handleSignin = async values => {
+		const { history, userLogin } = this.props;
+		await userLogin(values);
+		if (this.props.userData.isAuthenticated) {
 			history.push('/dashboard');
-		});
+		}
 	};
+
 	render() {
 		return (
 			<div className={css.formBox}>
 				<div className={css.form}>
-					<LoginForm onSubmit={this.handleUserLogin} />
+					<SigninForm onSubmit={this.handleSignin} />
 					<div className={css.linksBox}>
 						<div className={css.links}>
 							<span>Esqueceu a senha?</span>
@@ -35,8 +34,13 @@ class LoginContainer extends Component {
 	}
 }
 
+const mapStateToProps = (state, ownProps) => ({
+	userData: state.auth,
+	history: ownProps.history
+});
+
 const mapActionToProps = {
 	userLogin
 };
 
-export default connect(null, mapActionToProps)(LoginContainer);
+export default connect(mapStateToProps, mapActionToProps)(Signin);

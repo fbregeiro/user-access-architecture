@@ -6,15 +6,15 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { UserContext } from './context/userContext';
 
 // Routes
-import loginContainer from './containers/auth/loginContainer';
-import resetPasswordContainer from './containers/auth/resetPasswordContainer';
-import passwordActivationContainer from './containers/auth/passwordActivationContainer';
-import accountActivationContainer from './containers/auth/accountActivationContainer';
-import dashboardContainer from './containers/dashboard/dashboardContainer';
-import myProfileContainer from './containers/auth/myProfileContainer';
-import usersContainer from './containers/admin/users/usersContainer';
-import newUserContainer from './containers/admin/users/newUserContainer';
-import profilesContainer from './containers/admin/profiles/profilesContainer';
+import Signin from './containers/auth/Signin';
+import ResetPassword from './containers/auth/ResetPassword';
+import PasswordActivation from './containers/auth/PasswordActivation';
+import AccountActivation from './containers/auth/AccountActivation';
+import Dashboard from './containers/dashboard/Dashboard';
+import MyProfile from './containers/auth/MyProfile';
+import Users from './containers/admin/Users';
+import NewUser from './containers/admin/NewUser';
+import Profiles from './containers/admin/Profiles';
 
 const canRenderComponent = (
 	user,
@@ -75,39 +75,19 @@ export default (
 	<div>
 		<Switch>
 			<Route exact path="/" component={null} />
-			<Route exact path="/login" component={loginContainer} />
-			<Route exact path="/reset-password" component={resetPasswordContainer} />
-			<Route
-				exact
-				path="/account-activation"
-				component={accountActivationContainer}
-			/>
-			<Route
-				exact
-				path="/password-activation"
-				component={passwordActivationContainer}
-			/>
+			<Route exact path="/login" component={Signin} />
+			<Route exact path="/reset-password" component={ResetPassword} />
+			<Route exact path="/account-activation" component={AccountActivation} />
+			<Route exact path="/password-activation" component={PasswordActivation} />
 			<PrivateRoute
 				path="/my-profile"
-				component={myProfileContainer}
+				component={MyProfile}
 				authorize={false}
 			/>
-			<PrivateRoute
-				path="/dashboard"
-				component={dashboardContainer}
-				authorize={false}
-			/>
-			<PrivateRoute path="/users" component={usersContainer} authorize={true} />
-			<PrivateRoute
-				path="/new-user"
-				component={newUserContainer}
-				authorize={true}
-			/>
-			<PrivateRoute
-				path="/profiles"
-				component={profilesContainer}
-				authorize={true}
-			/>
+			<PrivateRoute path="/dashboard" component={Dashboard} authorize={false} />
+			<PrivateRoute path="/users" component={Users} authorize={true} />
+			<PrivateRoute path="/new-user" component={NewUser} authorize={true} />
+			<PrivateRoute path="/profiles" component={Profiles} authorize={true} />
 		</Switch>
 	</div>
 );
