@@ -1,0 +1,32 @@
+.tabs {
+	background-color: #3698bf !important;
+	border-radius: 5px;
+}
+
+.tabContent h2 {
+	margin-top: 25px;
+	margin-bottom: 0px;
+}
+
+.tabContent h3 {
+	margin-top: 5px;
+	margin-bottom: 0px;
+	font-weight: normal;
+}
+
+.tabHeader {
+	width: 100%;
+	margin-bottom: 25px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+.tabHeader .titleContainer {
+	width: 70%;
+}
+
+.tabHeader .primaryActionContainer {
+	width: 30%;
+	text-align: right;
+}

@@ -13,7 +13,6 @@ import AccountActivation from './containers/auth/AccountActivation';
 import Dashboard from './containers/dashboard/Dashboard';
 import MyProfile from './containers/auth/MyProfile';
 import Users from './containers/admin/Users';
-import NewUser from './containers/admin/NewUser';
 import Profiles from './containers/admin/Profiles';
 
 const canRenderComponent = (
@@ -86,7 +85,6 @@ export default (
 			/>
 			<PrivateRoute path="/dashboard" component={Dashboard} authorize={false} />
 			<PrivateRoute path="/users" component={Users} authorize={true} />
-			<PrivateRoute path="/new-user" component={NewUser} authorize={true} />
 			<PrivateRoute path="/profiles" component={Profiles} authorize={true} />
 		</Switch>
 	</div>

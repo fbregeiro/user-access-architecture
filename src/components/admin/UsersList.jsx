@@ -1,45 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Table } from '../common/Table';
+import { CustomButton } from '../common';
 
-import styles from '../../styles/styles.css';
+const UsersList = props => {
+	const columns = [
+		{
+			Header: 'Nome',
+			accessor: 'fullName', // String-based value accessors!
+			headerStyle: styles.headerStyle,
+			style: styles.bodyStyle,
+			minWidth: 150
+		},
+		{
+			Header: 'E-mail',
+			accessor: 'email',
+			headerStyle: styles.headerStyle,
+			style: styles.bodyStyle,
+			minWidth: 150
+		},
+		{
+			id: 'profile', // Required because our accessor is not a string
+			Header: 'Perfil',
+			accessor: d => d.profile.description, // Custom value accessors!
+			headerStyle: styles.headerStyle,
+			style: styles.bodyStyle
+		},
+		{
+			Header: '',
+			accessor: 'id',
+			Cell: x => (
+				<CustomButton
+					style={styles.iconStyle}
+					onClick={e => props.editClick(e, x.value)}>
+					Editar
+				</CustomButton>
+			),
+			headerStyle: styles.headerStyle,
+			maxWidth: 60
+		}
+	];
 
-function UsersList({ users, handleEditUser }) {
-	return (
-		<table id="t" className={styles.basictable}>
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>E-Mail</th>
-					<th>Documento</th>
-					<th>Perfil</th>
-					<th>Status</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				{users.map(user => (
-					<tr key={user.id}>
-						<td>{user.fullName}</td>
-						<td>{user.email}</td>
-						<td>{user.documentNumber}</td>
-						<td>{user.profile.description}</td>
-						<td>{user.isActive ? 'Ativo' : 'Inativo'}</td>
-						<td>
-							<button
-								onClick={() => handleEditUser(user)}
-								className={styles.basicbutton}>
-								Editar
-							</button>
-						</td>
-					</tr>
-				))}
-			</tbody>
-		</table>
-	);
-}
+	return <Table columns={columns} data={props.data} />;
+};
 
-UsersList.proptTypes = {
-	users: PropTypes.array.isRequired
+const styles = {
+	headerStyle: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		color: 'white',
+		backgroundColor: 'grey',
+		textTransform: 'uppercase',
+		height: 40
+	},
+	bodyStyle: {
+		display: 'flex',
+		alignItems: 'center',
+		height: 40
+	},
+	iconStyle: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		cursor: 'pointer'
+	}
+};
+
+UsersList.propTypes = {
+	data: PropTypes.arrayOf(PropTypes.object).isRequired,
+	editClick: PropTypes.func.isRequired
 };
 
 export default UsersList;

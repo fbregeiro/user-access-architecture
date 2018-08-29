@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { CustomButton } from '../../components/common';
 import UsersList from '../../components/admin/UsersList';
-import NewUserForm from '../../components/admin/NewUserForm';
-import EditUserForm from '../../components/admin/EditUserForm';
+import tab from './tab.css';
 
-import {
-	getUsersByStatus,
-	createUserByInvitation,
-	updateUser
-} from '../../actions/userActions';
-
-import { getProfilesByStatus } from '../../actions/profileActions';
+import { getUsersByStatus } from '../../actions/userActions';
+import UserContainer from './UserContainer';
 
 import css from './Users.css';
-import styles from '../../styles/styles.css';
 
 class Users extends Component {
 	constructor(props) {
 		super(props);
-		this.handleEditUser = this.handleEditUser.bind(this);
-		this.handleSaveNewUser = this.handleSaveNewUser.bind(this);
-		this.handleSaveExistingUser = this.handleSaveExistingUser.bind(this);
-		this.handleChangeFilter = this.handleChangeFilter.bind(this);
+		this.handleShowNewUserModal = this.handleShowNewUserModal.bind(this);
+		this.handleShowEditUserModal = this.handleShowEditUserModal.bind(this);
+		this.handleHideUserModal = this.handleHideUserModal.bind(this);
+		this.handleOnSubmitUser = this.handleOnSubmitUser.bind(this);
 
 		this.state = {
+			usersFilteredList: this.props.users,
 			selectedUser: {},
-			usersFilteredList: this.props.users
+			showUserModal: false
 		};
-		this.props.getProfilesByStatus(true);
-	}
-	componentDidMount() {
-		this.getUsers();
 	}
 
 	getUsers() {
@@ -40,95 +30,83 @@ class Users extends Component {
 		});
 	}
 
-	handleChangeFilter(event) {
-		var filterValue = event ? event.target.value : '';
-		var filteredList = this.props.users;
-		filteredList = filteredList.filter(
-			user =>
-				user.fullName.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
-		);
-		this.setState({ usersFilteredList: filteredList });
+	componentDidMount() {
+		this.getUsers();
 	}
 
 	handleShowNewUserModal() {
-		window.location.hash = '#open-new-user-modal';
+		this.setState({ selectedUser: null });
+		this.setState({ showUserModal: true });
+		window.location.hash = '#open-user-modal';
 	}
 
-	handleEditUser(user) {
-		this.setState({ selectedUser: user });
-		window.location.hash = '#open-edit-user-modal';
-	}
+	// eslint-disable-next-line
+	handleEditClick = (e, id) => {
+		let user = this.props.users.find(item => item.id === id);
+		this.handleShowEditUserModal(user);
+	};
 
-	handleSaveNewUser(user) {
-		this.props.createUserByInvitation(user).then(() => {
-			this.getUsers();
-			window.location.hash = '#modal-close';
+	handleShowEditUserModal(user) {
+		this.setState({
+			selectedUser: {
+				id: user.id,
+				email: user.email,
+				fullName: user.fullName,
+				profileId: user.profileId,
+				isActive: user.isActive
+			}
 		});
+		this.setState({ showUserModal: true });
+		window.location.hash = '#open-user-modal';
 	}
 
-	handleSaveExistingUser(user) {
-		this.props.updateUser(user).then(() => {
-			this.getUsers();
-			window.location.hash = '#modal-close';
-		});
+	handleHideUserModal() {
+		this.setState({ selectedUser: null });
+		this.setState({ showUserModal: false });
+		window.location.hash = '#modal-close';
+	}
+
+	handleOnSubmitUser() {
+		this.getUsers();
+		this.handleHideUserModal();
 	}
 
 	render() {
-		const { profiles } = this.props;
 		return (
 			<div>
-				<h3>Gestão de Usuários</h3>
-				<h5>
-					Administre os usuários atuais e convide novos usuários para a
-					plataforma.
-				</h5>
-				<div className={css.header}>
-					<div className={[css.column, css.width80].join(' ')}>
-						<input
-							type="text"
-							placeholder="Filtro por coincidência"
-							name="filter"
-							className={styles.basicinput}
-							onChange={this.handleChangeFilter}
-						/>
+				<div className={tab.tabHeader}>
+					<div className={tab.titleContainer}>
+						<h2>Gestão de usuários</h2>
+						<h3>
+							Administre os usuários atuais e convide novos usuários para a
+							plataforma.
+						</h3>
 					</div>
-					<div className={[css.column, css.width20].join(' ')}>
-						<button
-							onClick={this.handleShowNewUserModal}
-							className={styles.basicbutton}>
-							Convidar Usuário
-						</button>
+					<div className={tab.primaryActionContainer}>
+						<CustomButton onClick={this.handleShowNewUserModal}>
+							Convidar usuário
+						</CustomButton>
 					</div>
 				</div>
-				<UsersList
-					users={this.state.usersFilteredList || []}
-					handleEditUser={this.handleEditUser}
-				/>
-				<div id="open-edit-user-modal" className={css['modal-window']}>
+				<div className={tab.grid}>
+					<UsersList
+						data={this.state.usersFilteredList || []}
+						editClick={this.handleEditClick}
+					/>
+				</div>
+				<div id="open-user-modal" className={css['modal-window']}>
 					<div>
 						<a href="#modal-close" title="Close" className={css['modal-close']}>
 							X
 						</a>
-						<div>
-							<EditUserForm
-								user={this.state.selectedUser}
-								profiles={profiles || []}
-								onSubmit={this.handleSaveExistingUser}
-							/>
-						</div>
-					</div>
-				</div>
-				<div id="open-new-user-modal" className={css['modal-window']}>
-					<div>
-						<a href="#modal-close" title="Close" className={css['modal-close']}>
-							X
-						</a>
-						<div>
-							<NewUserForm
-								profiles={profiles}
-								onSubmit={this.handleSaveNewUser}
-							/>
-						</div>
+						{this.state.showUserModal && (
+							<div>
+								<UserContainer
+									user={this.state.selectedUser}
+									onSubmit={this.handleOnSubmitUser}
+								/>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
@@ -137,15 +115,11 @@ class Users extends Component {
 }
 
 const mapStateToProps = state => ({
-	users: state.admin.users,
-	profiles: state.admin.profiles
+	users: state.admin.users
 });
 
 const mapActionToProps = {
-	getUsersByStatus,
-	createUserByInvitation,
-	updateUser,
-	getProfilesByStatus
+	getUsersByStatus
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Users);

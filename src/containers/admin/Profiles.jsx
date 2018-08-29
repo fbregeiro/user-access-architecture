@@ -1,38 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { CustomButton } from '../../components/common';
 import ProfilesList from '../../components/admin/ProfilesList';
-import NewProfileForm from '../../components/admin/NewProfileForm';
-import EditProfileForm from '../../components/admin/EditProfileForm';
+import tab from './tab.css';
 
-import {
-	getProfilesByStatus,
-	createProfile,
-	updateProfile
-} from '../../actions/profileActions';
-
-import { getSitemapsOptions } from '../../actions/utilsActions';
+import { getProfilesByStatus } from '../../actions/profileActions';
+import ProfileContainer from './ProfileContainer';
 
 import css from './Profiles.css';
-import styles from '../../styles/styles.css';
 
 class Profiles extends Component {
 	constructor(props) {
 		super(props);
-		this.handleEditProfile = this.handleEditProfile.bind(this);
-		this.handleSaveNewProfile = this.handleSaveNewProfile.bind(this);
-		this.handleChangeFilter = this.handleChangeFilter.bind(this);
-		this.handleSaveExistingProfile = this.handleSaveExistingProfile.bind(this);
+		this.handleShowNewProfileModal = this.handleShowNewProfileModal.bind(this);
+		this.handleShowEditProfileModal = this.handleShowEditProfileModal.bind(
+			this
+		);
+		this.handleHideProfileModal = this.handleHideProfileModal.bind(this);
+		this.handleOnSubmitProfile = this.handleOnSubmitProfile.bind(this);
 
 		this.state = {
 			selectedProfile: {},
-			profilesFilteredList: this.props.profiles
+			profilesFilteredList: this.props.profiles,
+			showProfileModal: false
 		};
 	}
 
 	componentDidMount() {
 		this.getProfiles();
-		this.props.getSitemapsOptions();
 	}
 
 	getProfiles() {
@@ -41,94 +36,78 @@ class Profiles extends Component {
 		});
 	}
 
-	handleChangeFilter(event) {
-		var filterValue = event ? event.target.value : '';
-		var filteredList = this.props.profiles;
-		filteredList = filteredList.filter(
-			profile =>
-				profile.description.toLowerCase().indexOf(filterValue.toLowerCase()) >
-				-1
-		);
-		this.setState({ profilesFilteredList: filteredList });
-	}
+	// eslint-disable-next-line
+	handleShowNewProfileModal = e => {
+		this.setState({
+			selectedProfile: {
+				id: null,
+				description: null,
+				isActive: true,
+				canCreate: false,
+				canEdit: false,
+				sitemapIds: []
+			}
+		});
+		this.setState({ showProfileModal: true });
+		window.location.hash = '#open-profile-modal';
+	};
 
-	handleShowNewProfileModal() {
-		window.location.hash = '#open-new-profile-modal';
-	}
+	// eslint-disable-next-line
+	handleEditClick = (e, id) => {
+		let profile = this.props.profiles.find(item => item.id === id);
+		this.handleShowEditProfileModal(profile);
+	};
 
-	handleEditProfile(profile) {
-		window.location.hash = '#open-edit-profile-modal';
+	handleShowEditProfileModal(profile) {
 		this.setState({ selectedProfile: profile });
+		this.setState({ showProfileModal: true });
+		window.location.hash = '#open-profile-modal';
 	}
 
-	handleSaveNewProfile(profile) {
-		this.props.createProfile(profile).then(() => {
-			this.getProfiles();
-			window.location.hash = '#modal-close';
-		});
+	handleHideProfileModal() {
+		this.setState({ selectedProfile: null });
+		this.setState({ showProfileModal: false });
+		window.location.hash = '#modal-close';
 	}
 
-	handleSaveExistingProfile(profile) {
-		this.props.updateProfile(profile).then(() => {
-			this.getProfiles();
-			window.location.hash = '#modal-close';
-		});
+	handleOnSubmitProfile() {
+		this.getProfiles();
+		this.handleHideProfileModal();
 	}
 
 	render() {
-		const { sitemapOptions } = this.props;
+		const { profiles } = this.props;
+
 		return (
 			<div>
-				<h3>Gestão de Perfis</h3>
-				<h5>Administre os perfis atuais ou crie novos perfis.</h5>
-				<div className={css.header}>
-					<div className={[css.column, css.width80].join(' ')}>
-						<input
-							type="text"
-							placeholder="Filtro por coincidência"
-							name="filter"
-							className={styles.basicinput}
-							onChange={this.handleChangeFilter}
-						/>
+				<div className={tab.tabHeader}>
+					<div className={tab.titleContainer}>
+						<h2>Gestão de perfis</h2>
+						<h3>Administre os perfis atuais e crie novos perfis.</h3>
 					</div>
-					<div className={[css.column, css.width20].join(' ')}>
-						<input
-							type="button"
-							value="Novo perfil"
-							className={styles.basicinput}
-							onClick={this.handleShowNewProfileModal}
-						/>
+					<div className={tab.primaryActionContainer}>
+						<CustomButton onClick={this.handleShowNewProfileModal}>
+							Criar perfil
+						</CustomButton>
 					</div>
 				</div>
-				<ProfilesList
-					profiles={this.state.profilesFilteredList || []}
-					handleEditProfile={this.handleEditProfile}
-				/>
-				<div id="open-edit-profile-modal" className={css['modal-window']}>
+
+				<div className={tab.grid}>
+					<ProfilesList data={profiles} editClick={this.handleEditClick} />
+				</div>
+				<div id="open-profile-modal" className={css['modal-window']}>
 					<div>
 						<a href="#modal-close" title="Close" className={css['modal-close']}>
 							X
 						</a>
-						<div>
-							<EditProfileForm
-								profile={this.state.selectedProfile}
-								onSubmit={this.handleSaveExistingProfile}
-								sitemapOptions={sitemapOptions}
-							/>
-						</div>
-					</div>
-				</div>
-				<div id="open-new-profile-modal" className={css['modal-window']}>
-					<div>
-						<a href="#modal-close" title="Close" className={css['modal-close']}>
-							X
-						</a>
-						<div>
-							<NewProfileForm
-								onSubmit={this.handleSaveNewProfile}
-								sitemapOptions={sitemapOptions}
-							/>
-						</div>
+						{this.state.showProfileModal && (
+							<div>
+								<ProfileContainer
+									profile={this.state.selectedProfile}
+									onSubmit={this.handleOnSubmitProfile}
+								/>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
@@ -137,15 +116,11 @@ class Profiles extends Component {
 }
 
 const mapStateToProps = state => ({
-	profiles: state.admin.profiles,
-	sitemapOptions: state.admin.sitemapOptions
+	profiles: state.admin.profiles
 });
 
 const mapActionToProps = {
-	getProfilesByStatus,
-	getSitemapsOptions,
-	createProfile,
-	updateProfile
+	getProfilesByStatus
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Profiles);

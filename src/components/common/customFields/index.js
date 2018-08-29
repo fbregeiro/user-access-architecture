@@ -1,9 +1,13 @@
 import CustomInput from './CustomInput';
-import ToggleButton from './CustomToggleButton';
+import CustomDropDown from './CustomDropDownList';
+import CustomToggleButton from './CustomToggleButton';
+import PickList from './CustomPickList';
 
 const customFields = {
 	Input: CustomInput,
-	ToggleButton: ToggleButton
+	DropDown: CustomDropDown,
+	ToggleButton: CustomToggleButton,
+	PickList: PickList
 };
 
 export default customFields;

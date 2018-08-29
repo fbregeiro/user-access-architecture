@@ -85,40 +85,32 @@ export const accountActivationValidate = values => {
 	return errors;
 };
 
-export const createUserByInvitationValidate = values => {
+export const saveUserValidate = values => {
 	const { email, fullName, profile } = messages;
 	const errors = {};
 
-	if (!values.fullName) {
-		errors.fullName = fullName.required;
-	}
-
-	if (!values.email) {
-		errors.email = email.required;
-	}
-
-	if (values.email && validEmail(values.email)) {
-		errors.email = email.invalid;
-	}
-
-	if (!values.profileId) {
-		errors.profileId = profile.required;
-	}
-
-	return errors;
-};
-
-export const updateUserValidate = values => {
-	const { profile } = messages;
-	const errors = {};
-
-	if (!values.profileId) {
-		errors.profileId = profile.required;
+	if (values.id) {
+		if (!values.profileId) {
+			errors.profileId = profile.required;
+		}
+	} else {
+		if (!values.fullName) {
+			errors.fullName = fullName.required;
+		}
+		if (!values.email) {
+			errors.email = email.required;
+		}
+		if (values.email && validEmail(values.email)) {
+			errors.email = email.invalid;
+		}
+		if (!values.profileId) {
+			errors.profileId = profile.required;
+		}
 	}
 	return errors;
 };
 
-export const createProfileValidate = values => {
+export const saveProfileValidate = values => {
 	const { description } = messages;
 	const errors = {};
 
@@ -126,16 +118,6 @@ export const createProfileValidate = values => {
 		errors.description = description.required;
 	}
 
-	return errors;
-};
-
-export const updateProfileValidate = values => {
-	const { profile } = messages;
-	const errors = {};
-
-	if (!values.profileId) {
-		errors.profileId = profile.required;
-	}
 	return errors;
 };
 
