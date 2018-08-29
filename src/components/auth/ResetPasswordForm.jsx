@@ -3,36 +3,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
-// Validation
-import { loginValidate } from '../../utils/validation';
+import customFields from '../common/customFields';
+import { resetPasswordValidate } from '../../utils/validation';
 
-// Styles and assets
 import styles from '../../styles/styles.css';
 
-class LoginComponent extends Component {
+class ResetPassword extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
 			<Form onSubmit={handleSubmit} className={styles.form}>
-				<h4>Informe suas credencias para acessar a plataforma</h4>
+				<h4>
+					Informe seu e-mail e te enviaremos um link seguro para que possa
+					reiniciar sua senha
+				</h4>
 				<div className={styles.field}>
-					<h5>E-Mail:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="E-mail"
+						id={1}
+						label="E-mail"
 						name="email"
-						className={styles.basicinput}
-					/>
-				</div>
-				<div className={styles.field}>
-					<h5>Senha:</h5>
-					<Field
-						type="password"
-						component="input"
-						placeholder="Senha"
-						name="password"
-						className={styles.basicinput}
+						autoComplete="email"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.buttons}>
@@ -40,7 +31,7 @@ class LoginComponent extends Component {
 						type="submit"
 						disabled={pristine || submitting}
 						className={styles.basicbutton}>
-						Login
+						Solicitar reinicialização de senha
 					</button>
 				</div>
 			</Form>
@@ -48,16 +39,16 @@ class LoginComponent extends Component {
 	}
 }
 
-LoginComponent.propTypes = {
+ResetPassword.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
-const LoginForm = reduxForm({
-	form: 'loginForm',
-	validate: loginValidate,
+const ResetPasswordForm = reduxForm({
+	form: 'resetPasswordForm',
+	validate: resetPasswordValidate,
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(LoginComponent);
+})(ResetPassword);
 
-export default LoginForm;
+export default ResetPasswordForm;

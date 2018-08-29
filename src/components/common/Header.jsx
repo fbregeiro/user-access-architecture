@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
 
-import css from './headerComponent.css';
+import css from './Header.css';
 
-export default function HeaderComponent() {
+export default function Header() {
 	return (
 		<UserContext.Consumer>
 			{({ token }) => (

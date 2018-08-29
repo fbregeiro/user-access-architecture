@@ -8,12 +8,12 @@ import history from '../../store/history';
 import { resetUserPassword } from '../../actions/authenticationActions';
 
 // Components
-import ResetPasswordForm from '../../components/auth/resetPasswordComponent';
+import ResetPasswordForm from '../../components/auth/ResetPasswordForm';
 
 // Styles and assets
-import css from './resetPasswordContainer.css';
+import css from './ResetPassword.css';
 
-class ResetPasswordContainer extends Component {
+class ResetPassword extends Component {
 	handleResetPassword = email => {
 		this.props.resetUserPassword(email).then(() => {
 			history.push('/');
@@ -41,4 +41,4 @@ const mapActionToProps = {
 	resetUserPassword
 };
 
-export default connect(null, mapActionToProps)(ResetPasswordContainer);
+export default connect(null, mapActionToProps)(ResetPassword);

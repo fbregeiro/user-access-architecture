@@ -5,9 +5,9 @@ import history from '../../store/history';
 import { updateUser } from '../../actions/userActions';
 import { uploadFile } from '../../actions/utilsActions';
 
-import MyProfileForm from '../../components/auth/myProfileComponent';
+import MyProfileForm from '../../components/auth/MyProfileForm';
 
-class MyProfileContainer extends Component {
+class MyProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.loadUser = this.loadUser.bind(this);
@@ -60,10 +60,6 @@ class MyProfileContainer extends Component {
 					this.setState({
 						newUserPhotoUrl: uploadFileResponse.payload.fileUrl
 					});
-
-					// const user = this.props.user;
-					// user.photoUrl = uploadFileResponse.payload.fileUrl;
-					// this.setState({ user: user });
 				}
 			});
 	};
@@ -93,4 +89,4 @@ const mapActionToProps = {
 	uploadFile
 };
 
-export default connect(mapStateToProps, mapActionToProps)(MyProfileContainer);
+export default connect(mapStateToProps, mapActionToProps)(MyProfile);

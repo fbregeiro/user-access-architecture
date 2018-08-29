@@ -17,7 +17,7 @@ describe('test - utilsActions/getSitemapOptions()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + GET_SITEMAP_OPTIONS.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.GET_SITEMAP_OPTIONS);
+			expect(actions[1].type).toEqual(types.GET_SITEMAP_OPTIONS_SUCCESS);
 
 			// Expect to receive 1 record from mocked api.
 			const profilesList = actions[1];
@@ -43,7 +43,7 @@ describe('test - utilsActions/uploadFile()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + UPLOAD_FILE.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.UPLOAD_FILE);
+				expect(actions[1].type).toEqual(types.UPLOAD_FILE_SUCCESS);
 
 				// Expect to receive 1 record from mocked api.
 				const iFileUploadResponse = actions[1];

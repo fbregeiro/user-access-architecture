@@ -17,7 +17,7 @@ describe('test - userActions/getUsersByStatus()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + GET_USERS_BY_STATUS.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.GET_USERS_BY_STATUS);
+			expect(actions[1].type).toEqual(types.GET_USERS_BY_STATUS_SUCCESS);
 
 			// Expect to receive 2 records from mocked api.
 			const usersList = actions[1];
@@ -40,7 +40,7 @@ describe('test - userActions/getUserById()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + GET_USER_BY_ID.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.GET_USER_BY_ID);
+			expect(actions[1].type).toEqual(types.GET_USER_BY_ID_SUCCESS);
 
 			// Expect to receive 1 record from mocked api.
 			const usersList = actions[1];
@@ -65,7 +65,9 @@ describe('test - userActions/createUserByInvitation()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + CREATE_USER_BY_INVITATION.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.CREATE_USER_BY_INVITATION);
+				expect(actions[1].type).toEqual(
+					types.CREATE_USER_BY_INVITATION_SUCCESS
+				);
 
 				// Expect to receive 1 record from mocked api.
 				const usersList = actions[1];
@@ -88,7 +90,7 @@ describe('test - userActions/updateUser()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + UPDATE_USER.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.UPDATE_USER);
+			expect(actions[1].type).toEqual(types.UPDATE_USER_SUCCESS);
 
 			// Expect to receive 1 record from mocked api.
 			const usersList = actions[1];
@@ -113,7 +115,7 @@ describe('test - userActions/activateUser()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + ACTIVATE_USER.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.ACTIVATE_USER);
+				expect(actions[1].type).toEqual(types.ACTIVATE_USER_SUCCESS);
 
 				// Nothing expected as result.
 				expect(actions[1].payload).toBeUndefined();

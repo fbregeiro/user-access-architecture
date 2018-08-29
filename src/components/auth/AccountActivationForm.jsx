@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 
-// Validation
+import customFields from '../common/customFields';
 import { accountActivationValidate } from '../../utils/validation';
 
-// Styles and assets
 import styles from '../../styles/styles.css';
 
-class AccountActivationComponent extends Component {
+class AccountActivation extends Component {
 	render() {
 		const { handleSubmit, pristine, submitting } = this.props;
 		return (
@@ -19,43 +18,40 @@ class AccountActivationComponent extends Component {
 					e-mail
 				</h4>
 				<div className={styles.field}>
-					<h5>Convite:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="Convite"
+						id={1}
+						label="Convite"
 						name="accessCode"
-						className={styles.basicinput}
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>E-Mail:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="E-Mail"
+						id={2}
+						label="E-mail"
 						name="email"
-						className={styles.basicinput}
+						autoComplete="email"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>Senha:</h5>
 					<Field
-						type="password"
-						component="input"
-						placeholder="Senha"
+						id={3}
+						label="Senha"
 						name="password"
-						className={styles.basicinput}
+						type="password"
+						autoComplete="password"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>Confirmação de Senha:</h5>
 					<Field
-						type="password"
-						component="input"
-						placeholder="Confirmação de Senha"
+						id={4}
+						label="Confirmação de Senha"
 						name="passwordConfirmation"
-						className={styles.basicinput}
+						type="password"
+						autoComplete="password"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.buttons}>
@@ -71,7 +67,7 @@ class AccountActivationComponent extends Component {
 	}
 }
 
-AccountActivationComponent.propTypes = {
+AccountActivation.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 };
 
@@ -81,6 +77,6 @@ const AccountActivationForm = reduxForm({
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(AccountActivationComponent);
+})(AccountActivation);
 
 export default AccountActivationForm;

@@ -17,7 +17,7 @@ describe('test - profileActions/getProfilesByStatus()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + GET_PROFILE_BY_STATUS.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.GET_PROFILES_BY_STATUS);
+			expect(actions[1].type).toEqual(types.GET_PROFILES_BY_STATUS_SUCCESS);
 
 			// Expect to receive 2 records from mocked api.
 			const profilesList = actions[1];
@@ -41,7 +41,7 @@ describe('test - profileActions/getProfileById()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + GET_PROFILE_BY_ID.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.GET_PROFILE_BY_ID);
+			expect(actions[1].type).toEqual(types.GET_PROFILE_BY_ID_SUCCESS);
 
 			// Expect to receive 1 record from mocked api.
 			const usersList = actions[1];
@@ -64,7 +64,7 @@ describe('test - profileActions/createProfile()', () => {
 			// Expecting to receive BEGIN_AJAX_CALL + CREATE_PROFILE.
 			expect(actions.length).toEqual(2);
 			expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-			expect(actions[1].type).toEqual(types.CREATE_PROFILE);
+			expect(actions[1].type).toEqual(types.CREATE_PROFILE_SUCCESS);
 
 			// Expect to receive 1 record from mocked api.
 			const profile = actions[1];
@@ -89,7 +89,7 @@ describe('test - profileActions/updateProfile()', () => {
 				// Expecting to receive BEGIN_AJAX_CALL + UPDATE_PROFILE.
 				expect(actions.length).toEqual(2);
 				expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
-				expect(actions[1].type).toEqual(types.UPDATE_PROFILE);
+				expect(actions[1].type).toEqual(types.UPDATE_PROFILE_SUCCESS);
 
 				// Expect to receive 1 record from mocked api.
 				const profile = actions[1];

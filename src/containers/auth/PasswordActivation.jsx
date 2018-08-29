@@ -7,12 +7,12 @@ import history from '../../store/history';
 import { changeUserPassword } from '../../actions/authenticationActions';
 
 // Components
-import PasswordActivationForm from '../../components/auth/passwordActivationComponent';
+import PasswordActivationForm from '../../components/auth/PasswordActivationForm';
 
 // Styles and assets
-import css from './passwordActivationContainer.css';
+import css from './PasswordActivation.css';
 
-class PasswordActivationContainer extends Component {
+class PasswordActivation extends Component {
 	handleChangePassword = values => {
 		const { token, password } = values;
 		this.props
@@ -37,4 +37,4 @@ const mapActionToProps = {
 	changeUserPassword
 };
 
-export default connect(null, mapActionToProps)(PasswordActivationContainer);
+export default connect(null, mapActionToProps)(PasswordActivation);

@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import { reduxForm, Form, Field } from 'redux-form';
 import Toggle from 'react-toggle';
 
-// Validation
+import customFields from '../common/customFields';
 import { saveMyProfileValidate } from '../../utils/validation';
 
-// Styles and assets
 import styles from '../../styles/styles.css';
-import css from './myProfileComponent.css';
+import css from './MyProfileForm.css';
 
 export const renderToggleInput = field => (
 	<Toggle
@@ -20,7 +19,7 @@ export const renderToggleInput = field => (
 	/>
 );
 
-class MyProfileComponent extends Component {
+class MyProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.toggleChangePassword = this.toggleChangePassword.bind(this);
@@ -54,33 +53,28 @@ class MyProfileComponent extends Component {
 					<input type="file" onChange={this.handleFileUpload} />
 				</div>
 				<div className={styles.field}>
-					<h5>Nome:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="Nome Completo"
+						id={1}
+						label="Nome Completo"
 						name="fullName"
-						className={styles.basicinput}
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>E-Mail:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="E-mail"
+						id={2}
+						label="E-mail"
 						name="email"
-						className={styles.basicinput}
+						autoComplete="email"
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
-					<h5>Documento:</h5>
 					<Field
-						type="text"
-						component="input"
-						placeholder="Documento"
+						id={3}
+						label="Documento"
 						name="documentNumber"
-						className={styles.basicinput}
+						component={customFields.Input}
 					/>
 				</div>
 				<div className={styles.field}>
@@ -93,25 +87,25 @@ class MyProfileComponent extends Component {
 				</div>
 				{this.state.changePassword && (
 					<div className={styles.field}>
-						<h5>Senha:</h5>
 						<Field
-							type="password"
-							component="input"
-							placeholder="Senha"
+							id={4}
+							label="Senha"
 							name="password"
-							className={styles.basicinput}
+							type="password"
+							autoComplete="password"
+							component={customFields.Input}
 						/>
 					</div>
 				)}
 				{this.state.changePassword && (
 					<div className={styles.field}>
-						<h5>Confirmação de Senha:</h5>
 						<Field
-							type="password"
-							component="input"
-							placeholder="Confirmação de Senha"
+							id={5}
+							label="Confirmação de Senha"
 							name="passwordConfirmation"
-							className={styles.basicinput}
+							type="password"
+							autoComplete="password"
+							component={customFields.Input}
 						/>
 					</div>
 				)}
@@ -128,7 +122,7 @@ class MyProfileComponent extends Component {
 	}
 }
 
-MyProfileComponent.propTypes = {
+MyProfile.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	onUploadUserPhoto: PropTypes.func.isRequired
 };
@@ -140,7 +134,7 @@ const MyProfileForm = reduxForm({
 	asyncBlurFields: [],
 	keepDirtyOnReinitialize: false,
 	destroyUnmount: true
-})(MyProfileComponent);
+})(MyProfile);
 
 const mapStateToProps = (state, ownProps) => ({
 	initialValues: {
